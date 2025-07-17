@@ -36,7 +36,7 @@
       margin-bottom: 20px;
     }
 
-    input, textarea {
+    select, input, textarea {
       width: 100%;
       margin-bottom: 15px;
       padding: 10px;
@@ -82,21 +82,45 @@
   <header>Ban Appeal Form</header>
 
   <div class="form-container">
-    <h3>Submit Your Appeal</h3>
+    <h3>Choose Appeal Type</h3>
+    <select id="appealType" onchange="showAppealForm()">
+      <option value="">Select</option>
+      <option value="ingame">Ingame</option>
+      <option value="discord">Discord</option>
+    </select>
 
-    <input type="text" id="discord" placeholder="Discord Username" required />
-    <textarea id="reason" placeholder="Why were you banned?" required></textarea>
-    <input type="url" id="evidence" placeholder="Evidence link (valid URL)" required />
-    <input type="email" id="email" placeholder="Your email (@gmail/@outlook only)" required />
-    <textarea id="note" placeholder="Additional note (optional)"></textarea>
-    <button class="submit" onclick="submitAppeal()">Submit Appeal</button>
+    <!-- Ingame Form -->
+    <div id="ingameForm" style="display:none;">
+      <input type="text" id="ign" placeholder="Ingame IGN" required />
+      <textarea id="reason" placeholder="Why were you banned?" required></textarea>
+      <input type="url" id="evidence" placeholder="Evidence link (valid URL)" required />
+      <input type="email" id="email" placeholder="Your email (@gmail/@outlook only)" required />
+      <textarea id="note" placeholder="Additional note (optional)"></textarea>
+      <button class="submit" onclick="submitAppeal()">Submit Appeal</button>
+    </div>
+
+    <!-- Discord Form -->
+    <div id="discordForm" style="display:none;">
+      <input type="text" id="dcUsername" placeholder="Discord Username" required />
+      <textarea id="dcReason" placeholder="Why were you banned?" required></textarea>
+      <input type="url" id="dcEvidence" placeholder="Evidence link (valid URL)" required />
+      <input type="email" id="dcEmail" placeholder="Your email (@gmail/@outlook only)" required />
+      <textarea id="dcNote" placeholder="Additional note (optional)"></textarea>
+      <button class="submit" onclick="submitAppeal()">Submit Appeal</button>
+    </div>
 
     <div id="appealStatus"></div>
   </div>
 
   <script>
-    const cooldownTime = 300000; // 5 mins
+    const cooldownTime = 300000;
     let lastSubmitted = 0;
+
+    function showAppealForm() {
+      const type = document.getElementById("appealType").value;
+      document.getElementById("ingameForm").style.display = type === "ingame" ? "block" : "none";
+      document.getElementById("discordForm").style.display = type === "discord" ? "block" : "none";
+    }
 
     function isValidURL(str) {
       return /^https?:\/\/.+\..+/i.test(str);
@@ -120,31 +144,58 @@
         return;
       }
 
-      const discord = document.getElementById("discord").value.trim();
-      const reason = document.getElementById("reason").value.trim();
-      const evidence = document.getElementById("evidence").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const note = document.getElementById("note").value.trim();
+      const type = document.getElementById("appealType").value;
+      let embed = { title: "", fields: [], color: 16753920 };
 
-      if (!discord || !reason || !evidence || !email || !isValidURL(evidence) || !isValidEmail(email)) {
-        status.textContent = "❌ Fill in all required fields with valid email and evidence link.";
+      if (type === "ingame") {
+        const ign = document.getElementById("ign").value.trim();
+        const reason = document.getElementById("reason").value.trim();
+        const evidence = document.getElementById("evidence").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const note = document.getElementById("note").value.trim();
+
+        if (!ign || !reason || !evidence || !email || !isValidURL(evidence) || !isValidEmail(email)) {
+          status.textContent = "❌ Fill in all required fields with valid email and evidence link.";
+          status.classList.add("error");
+          return;
+        }
+
+        embed.title = "🕹️ Ingame Ban Appeal";
+        embed.fields = [
+          { name: "IGN", value: ign },
+          { name: "Reason", value: reason },
+          { name: "Evidence", value: evidence },
+          { name: "Email", value: email },
+          { name: "Note", value: note || "(None)" }
+        ];
+      } else if (type === "discord") {
+        const username = document.getElementById("dcUsername").value.trim();
+        const reason = document.getElementById("dcReason").value.trim();
+        const evidence = document.getElementById("dcEvidence").value.trim();
+        const email = document.getElementById("dcEmail").value.trim();
+        const note = document.getElementById("dcNote").value.trim();
+
+        if (!username || !reason || !evidence || !email || !isValidURL(evidence) || !isValidEmail(email)) {
+          status.textContent = "❌ Fill in all required fields with valid email and evidence link.";
+          status.classList.add("error");
+          return;
+        }
+
+        embed.title = "💬 Discord Ban Appeal";
+        embed.fields = [
+          { name: "Discord Username", value: username },
+          { name: "Reason", value: reason },
+          { name: "Evidence", value: evidence },
+          { name: "Email", value: email },
+          { name: "Note", value: note || "(None)" }
+        ];
+      } else {
+        status.textContent = "❌ Choose an appeal type.";
         status.classList.add("error");
         return;
       }
 
-      const embed = {
-        title: "🛡️ Ban Appeal",
-        color: 16753920,
-        fields: [
-          { name: "Discord Username", value: discord },
-          { name: "Reason for Ban", value: reason },
-          { name: "Evidence", value: evidence },
-          { name: "Email", value: email },
-          { name: "Note", value: note || "(None)" }
-        ]
-      };
-
-      const webhookURL = "https://discord.com/api/webhooks/1395217267134038076/NDv-joIyBGUgxhjvDbSXfZUCv4SnFO7r2ApJZ7zlzNDTpnXA880U7RqJuQ30LCLCNgEG"; // 🔒 Replace this with your actual webhook
+      const webhookURL = "https://discord.com/api/webhooks/1395217267134038076/NDv-joIyBGUgxhjvDbSXfZUCv4SnFO7r2ApJZ7zlzNDTpnXA880U7RqJuQ30LCLCNgEG"; // 🔒 Replace with your webhook
 
       fetch(webhookURL, {
         method: "POST",
