@@ -93,23 +93,23 @@
       <input type="text" id="ign" placeholder="Player IGN" required />
       <textarea id="reason" placeholder="Reason for report" required></textarea>
       <input type="url" id="links" placeholder="Evidence link (must be a valid URL)" required />
-      <input type="email" id="email" placeholder="Your email" required />
-      <button class="submit" id="submitBtn" onclick="submitReport()">Submit Report</button>
+      <input type="email" id="email" placeholder="Your email (@gmail/@outlook only)" required />
+      <button class="submit" onclick="submitReport()">Submit Report</button>
     </div>
 
     <div id="discordForm" style="display:none;">
       <input type="text" id="dcUsername" placeholder="Discord Username" required />
       <textarea id="dcReason" placeholder="Reason for report" required></textarea>
       <input type="url" id="dcLinks" placeholder="Evidence link (must be a valid URL)" required />
-      <input type="email" id="dcEmail" placeholder="Your email" required />
-      <button class="submit" id="submitBtn2" onclick="submitReport()">Submit Report</button>
+      <input type="email" id="dcEmail" placeholder="Your email (@gmail/@outlook only)" required />
+      <button class="submit" onclick="submitReport()">Submit Report</button>
     </div>
 
     <div id="reportStatus"></div>
   </div>
 
   <script>
-    const cooldownTime = 300000; // 5 minutes
+    const cooldownTime = 300000; // 5 minutes in ms
     let lastSubmitted = 0;
 
     function showSubForm() {
@@ -122,6 +122,10 @@
       return /^https?:\/\/.+\..+/i.test(str);
     }
 
+    function isValidEmail(email) {
+      return /^[^@]+@(gmail\.com|outlook\.com)$/i.test(email);
+    }
+
     function submitReport() {
       const now = Date.now();
       const elapsed = now - lastSubmitted;
@@ -131,7 +135,7 @@
 
       if (elapsed < cooldownTime) {
         const secondsLeft = Math.ceil((cooldownTime - elapsed) / 1000);
-        status.textContent = `⏳ Wait ${secondsLeft} more seconds before submitting again.`;
+        status.textContent = `⏳ Wait ${secondsLeft} seconds before submitting again.`;
         status.classList.add("error");
         return;
       }
@@ -149,8 +153,8 @@
         const links = document.getElementById("links").value.trim();
         const email = document.getElementById("email").value.trim();
 
-        if (!ign || !reason || !links || !email || !isValidURL(links)) {
-          status.textContent = "❌ All fields required. Links must be valid URLs.";
+        if (!ign || !reason || !links || !email || !isValidURL(links) || !isValidEmail(email)) {
+          status.textContent = "❌ All fields are required. Use a valid link and email (@gmail/@outlook).";
           status.classList.add("error");
           return;
         }
@@ -168,8 +172,8 @@
         const links = document.getElementById("dcLinks").value.trim();
         const email = document.getElementById("dcEmail").value.trim();
 
-        if (!username || !reason || !links || !email || !isValidURL(links)) {
-          status.textContent = "❌ All fields required. Links must be valid URLs.";
+        if (!username || !reason || !links || !email || !isValidURL(links) || !isValidEmail(email)) {
+          status.textContent = "❌ All fields are required. Use a valid link and email (@gmail/@outlook).";
           status.classList.add("error");
           return;
         }
@@ -182,7 +186,7 @@
           { name: "Reporter Email", value: email }
         ];
       } else {
-        status.textContent = "❌ Select a report type.";
+        status.textContent = "❌ Choose a report type.";
         status.classList.add("error");
         return;
       }
@@ -195,7 +199,7 @@
         body: JSON.stringify({ embeds: [embed] })
       })
       .then(() => {
-        status.textContent = "✅ Report sent successfully!";
+        status.textContent = "✅ Report sent to Discord!";
         status.classList.add("success");
         lastSubmitted = Date.now();
       })
