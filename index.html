@@ -67,6 +67,53 @@
     <a href="/appeal.html" class="button">Appeal</a>
     <a href="/apply.html" class="button">Apply</a>
   </section>
+ <script>
+  // Sparkle trail effect
+  const trailColors = ['#ff0000', '#ff0077', '#ff3300'];
+  let trailIndex = 0;
+
+  document.body.addEventListener('mousemove', e => {
+    const star = document.createElement('div');
+    star.style.position = 'fixed';
+    star.style.top = e.clientY + 'px';
+    star.style.left = e.clientX + 'px';
+    star.style.width = '8px';
+    star.style.height = '8px';
+    star.style.borderRadius = '50%';
+    star.style.background = trailColors[trailIndex];
+    star.style.pointerEvents = 'none';
+    star.style.boxShadow = '0 0 8px white';
+    star.style.animation = 'fadeOut 0.6s ease-out forwards';
+    document.body.appendChild(star);
+    trailIndex = (trailIndex + 1) % trailColors.length;
+
+    setTimeout(() => star.remove(), 500);
+  });
+
+  // Scroll animation
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('section').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 1s ease-out';
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 600 * i);
+    });
+  });
+
+  // Optional: scroll to report section
+  function scrollToReport() {
+    document.getElementById("actions").scrollIntoView({ behavior: "smooth" });
+  }
+</script>
+
+<style>
+@keyframes fadeOut {
+  to { opacity: 0; transform: scale(0.5); }
+}
+</style>
 
 </body>
 </html>
