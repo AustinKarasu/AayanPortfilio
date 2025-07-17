@@ -1,0 +1,65 @@
+
+Here’s a complete index.html page for your ZyroneNetwork PvP Bedrock server with the specified features:
+html
+html>
+<title>ZyroNetwork - PvP Bedrock Server
+body {
+background-color: red;
+color: white;
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+cursor: url('cursor.png'), auto; /* Replace 'cursor.png' with your cursor image /
+}
+header {
+text-align: center;
+padding: 20px;
+}
+nav {
+margin: 20px 0;
+}
+nav a {
+color: white;
+text-decoration: none;
+margin: 0 15px;
+}
+.content {
+text-align: center;
+margin: 50px 0;
+}
+.footer {
+text-align: center;
+padding: 20px;
+}
+/ Simple cursor animation */
+body {
+position: relative;
+}
+body::after {
+content: '';
+position: absolute;
+width: 30px;
+height: 30px;
+background: rgba(255, 255, 255, 0.5);
+border-radius: 50%;
+pointer-events: none;
+transform: translate(-50%, -50%);
+transition: transform 0.1s;
+}
+body.move::after {
+transform: translate(-50%, -50%) scale(2);
+}
+</style>
+Welcome to ZyroNetworkYour PvP Bedrock Server
+ReportApplyContact
+Server IP and PortIP: 123.456.789.0Port: 19132Join our Discord
+© 2023 ZyroNetwork. All Rights Reserved.
+document.body.addEventListener('mousemove', function(e) {
+const dot = document.querySelector('body::after');
+dot.style.left = ${e.pageX}px;
+dot.style.top = ${e.pageY}px;
+document.body.classList.add('move');
+});
+document.body.addEventListener('mouseleave', function() {
+document.body.classList.remove('move');
+});
