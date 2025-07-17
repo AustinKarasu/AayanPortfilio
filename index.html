@@ -12,6 +12,7 @@
       color: #eee;
       scroll-behavior: smooth;
       cursor: url('https://cdn.custom-cursor.com/purple-star.cur'), auto;
+      overflow-x: hidden;
     }
     header {
       background: url('https://images.unsplash.com/photo-1525441795195-2c4a56d0295d?auto=format&fit=crop&w=1440&q=80') no-repeat center;
@@ -27,6 +28,13 @@
     section {
       padding: 40px 20px;
       text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .info {
       font-size: 1.5em;
@@ -46,6 +54,32 @@
     a.button:hover {
       background: #9f30ff;
     }
+    .video-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      padding: 40px 20px;
+    }
+    .video-box {
+      flex: 1 1 500px;
+      max-width: 600px;
+    }
+    .video-box iframe {
+      width: 100%;
+      height: 340px;
+      border-radius: 10px;
+      border: none;
+    }
+    .video-text {
+      flex: 1 1 300px;
+      max-width: 400px;
+      text-align: left;
+      padding-top: 20px;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: scale(0.5); }
+    }
   </style>
 </head>
 <body>
@@ -57,7 +91,7 @@
   <section id="server-info">
     <div class="info">📡 Server IP: <strong>play.zyronetwork.net</strong></div>
     <div class="info">🎮 Port: <strong>19132</strong></div>
-    <div class="info">💬 Join Discord: <a href="https://discord.zyronetwork.net/" class="button">Join Now</a></div>
+    <div class="info">💬 Join Discord: <a href="https://discord.gg/kmVE6dnX5H" class="button">Join Now</a></div>
   </section>
 
   <section id="actions">
@@ -67,53 +101,73 @@
     <a href="/appeal.html" class="button">Appeal</a>
     <a href="/apply.html" class="button">Apply</a>
   </section>
- <script>
-  // Sparkle trail effect
-  const trailColors = ['#ff0000', '#ff0077', '#ff3300'];
-  let trailIndex = 0;
 
-  document.body.addEventListener('mousemove', e => {
-    const star = document.createElement('div');
-    star.style.position = 'fixed';
-    star.style.top = e.clientY + 'px';
-    star.style.left = e.clientX + 'px';
-    star.style.width = '8px';
-    star.style.height = '8px';
-    star.style.borderRadius = '50%';
-    star.style.background = trailColors[trailIndex];
-    star.style.pointerEvents = 'none';
-    star.style.boxShadow = '0 0 8px white';
-    star.style.animation = 'fadeOut 0.6s ease-out forwards';
-    document.body.appendChild(star);
-    trailIndex = (trailIndex + 1) % trailColors.length;
+  <section id="videos">
+    <h2>🎥 ZyroNetwork Highlights</h2>
+    <div class="video-section">
+      <div class="video-box">
+        <iframe src="https://www.youtube.com/embed/RjAzLdv1KrY" allowfullscreen></iframe>
+      </div>
+      <div class="video-text">
+        <h3>Montage & PvP Showcase</h3>
+        <p>Watch epic PvP moments and ZyroNetwork gameplay in this high-energy montage.</p>
+      </div>
+    </div>
 
-    setTimeout(() => star.remove(), 500);
-  });
+    <div class="video-section">
+      <div class="video-box">
+        <iframe src="https://www.youtube.com/embed/2v8Z0YF3kFA" allowfullscreen></iframe>
+      </div>
+      <div class="video-text">
+        <h3>Factions Gset Practice</h3>
+        <p>Explore Zyro’s faction practice server and gear setups in this community-made video.</p>
+      </div>
+    </div>
 
-  // Scroll animation
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('section').forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'all 1s ease-out';
-      setTimeout(() => {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      }, 600 * i);
+    <div class="video-section">
+      <div class="video-box">
+        <iframe src="https://www.youtube.com/embed/9nbmZIGTgQw" allowfullscreen></iframe>
+      </div>
+      <div class="video-text">
+        <h3>LeBron 9 Big Bang Review</h3>
+        <p>Unrelated to Minecraft, but a cool sneaker review if you’re into style and collectibles!</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Sparkle cursor effect
+    const colors = ['#ff0000', '#ff0077', '#ff3300'];
+    let colorIndex = 0;
+    document.body.addEventListener('mousemove', e => {
+      const dot = document.createElement('div');
+      dot.style.position = 'fixed';
+      dot.style.left = e.pageX + 'px';
+      dot.style.top = e.pageY + 'px';
+      dot.style.width = '8px';
+      dot.style.height = '8px';
+      dot.style.borderRadius = '50%';
+      dot.style.background = colors[colorIndex];
+      dot.style.pointerEvents = 'none';
+      dot.style.boxShadow = '0 0 8px white';
+      dot.style.animation = 'fadeOut 0.6s ease-out forwards';
+      document.body.appendChild(dot);
+      colorIndex = (colorIndex + 1) % colors.length;
+      setTimeout(() => dot.remove(), 500);
     });
-  });
 
-  // Optional: scroll to report section
-  function scrollToReport() {
-    document.getElementById("actions").scrollIntoView({ behavior: "smooth" });
-  }
-</script>
-
-<style>
-@keyframes fadeOut {
-  to { opacity: 0; transform: scale(0.5); }
-}
-</style>
+    // Scroll in animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
 
 </body>
 </html>
