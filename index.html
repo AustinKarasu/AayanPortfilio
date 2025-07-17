@@ -1,65 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZyroNetwork PvP Server</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #1a0033, #000);
+      color: #eee;
+      scroll-behavior: smooth;
+      cursor: url('https://cdn.custom-cursor.com/purple-star.cur'), auto;
+    }
+    header {
+      background: url('https://images.unsplash.com/photo-1525441795195-2c4a56d0295d?auto=format&fit=crop&w=1440&q=80') no-repeat center;
+      background-size: cover;
+      text-align: center;
+      padding: 100px 20px;
+      color: red;
+      text-shadow: 2px 2px 5px black;
+      font-size: 3em;
+      font-weight: bold;
+      border-bottom: 4px solid purple;
+    }
+    section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .info {
+      font-size: 1.5em;
+      margin-bottom: 30px;
+    }
+    a.button {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      background: #6c00ff;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    a.button:hover {
+      background: #9f30ff;
+    }
+  </style>
+</head>
+<body>
 
-Here’s a complete index.html page for your ZyroneNetwork PvP Bedrock server with the specified features:
-html
-html>
-<title>ZyroNetwork - PvP Bedrock Server
-body {
-background-color: red;
-color: white;
-font-family: Arial, sans-serif;
-margin: 0;
-padding: 0;
-cursor: url('cursor.png'), auto; /* Replace 'cursor.png' with your cursor image /
-}
-header {
-text-align: center;
-padding: 20px;
-}
-nav {
-margin: 20px 0;
-}
-nav a {
-color: white;
-text-decoration: none;
-margin: 0 15px;
-}
-.content {
-text-align: center;
-margin: 50px 0;
-}
-.footer {
-text-align: center;
-padding: 20px;
-}
-/ Simple cursor animation */
-body {
-position: relative;
-}
-body::after {
-content: '';
-position: absolute;
-width: 30px;
-height: 30px;
-background: rgba(255, 255, 255, 0.5);
-border-radius: 50%;
-pointer-events: none;
-transform: translate(-50%, -50%);
-transition: transform 0.1s;
-}
-body.move::after {
-transform: translate(-50%, -50%) scale(2);
-}
-</style>
-Welcome to ZyroNetworkYour PvP Bedrock Server
-ReportApplyContact
-Server IP and PortIP: 123.456.789.0Port: 19132Join our Discord
-© 2023 ZyroNetwork. All Rights Reserved.
-document.body.addEventListener('mousemove', function(e) {
-const dot = document.querySelector('body::after');
-dot.style.left = ${e.pageX}px;
-dot.style.top = ${e.pageY}px;
-document.body.classList.add('move');
-});
-document.body.addEventListener('mouseleave', function() {
-document.body.classList.remove('move');
-});
+  <header>
+    <div>ZyroNetwork</div>
+  </header>
+
+  <section id="server-info">
+    <div class="info">📡 Server IP: <strong>play.zyronetwork.net</strong></div>
+    <div class="info">🎮 Port: <strong>19132</strong></div>
+    <div class="info">💬 Join Discord: <a href="https://discord.zyronetwork.net/" class="button">Join Now</a></div>
+  </section>
+
+  <section id="actions">
+    <h2>Support & Community</h2>
+    <a href="/helpdesk.html" class="button">Helpdesk</a>
+    <a href="/report.html" class="button">Report</a>
+    <a href="/appeal.html" class="button">Appeal</a>
+    <a href="/apply.html" class="button">Apply</a>
+  </section>
+
+</body>
+</html>
