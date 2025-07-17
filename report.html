@@ -92,7 +92,7 @@
     <div id="ingameForm" style="display:none;">
       <input type="text" id="ign" placeholder="Player IGN" required />
       <textarea id="reason" placeholder="Reason for report" required></textarea>
-      <input type="text" id="links" placeholder="Evidence links (YouTube, screenshots)" required />
+      <input type="url" id="links" placeholder="Evidence link (must be a valid URL)" required />
       <input type="email" id="email" placeholder="Your email" required />
       <button class="submit" id="submitBtn" onclick="submitReport()">Submit Report</button>
     </div>
@@ -100,7 +100,7 @@
     <div id="discordForm" style="display:none;">
       <input type="text" id="dcUsername" placeholder="Discord Username" required />
       <textarea id="dcReason" placeholder="Reason for report" required></textarea>
-      <input type="text" id="dcLinks" placeholder="Evidence links" required />
+      <input type="url" id="dcLinks" placeholder="Evidence link (must be a valid URL)" required />
       <input type="email" id="dcEmail" placeholder="Your email" required />
       <button class="submit" id="submitBtn2" onclick="submitReport()">Submit Report</button>
     </div>
@@ -109,7 +109,7 @@
   </div>
 
   <script>
-    const cooldownTime = 300000; // 5 minutes in milliseconds
+    const cooldownTime = 300000; // 5 minutes
     let lastSubmitted = 0;
 
     function showSubForm() {
@@ -118,23 +118,30 @@
       document.getElementById("discordForm").style.display = type === "discord" ? "block" : "none";
     }
 
+    function isValidURL(str) {
+      return /^https?:\/\/.+\..+/i.test(str);
+    }
+
     function submitReport() {
       const now = Date.now();
       const elapsed = now - lastSubmitted;
-
       const status = document.getElementById("reportStatus");
       status.style.display = "block";
       status.className = "";
 
       if (elapsed < cooldownTime) {
         const secondsLeft = Math.ceil((cooldownTime - elapsed) / 1000);
-        status.textContent = `⏳ Please wait ${secondsLeft} more seconds before submitting another report.`;
+        status.textContent = `⏳ Wait ${secondsLeft} more seconds before submitting again.`;
         status.classList.add("error");
         return;
       }
 
       const type = document.getElementById("reportType").value;
-      let content = "";
+      let embed = {
+        title: "",
+        fields: [],
+        color: 16753920 // orange
+      };
 
       if (type === "ingame") {
         const ign = document.getElementById("ign").value.trim();
@@ -142,41 +149,53 @@
         const links = document.getElementById("links").value.trim();
         const email = document.getElementById("email").value.trim();
 
-        if (!ign || !reason || !links || !email) {
-          status.textContent = "❌ Please fill out all fields.";
+        if (!ign || !reason || !links || !email || !isValidURL(links)) {
+          status.textContent = "❌ All fields required. Links must be valid URLs.";
           status.classList.add("error");
           return;
         }
 
-        content = `🕹️ **Ingame Report**\nIGN: ${ign}\nReason: ${reason}\nLinks: ${links}\nReporter Email: ${email}`;
+        embed.title = "🕹️ Ingame Report";
+        embed.fields = [
+          { name: "IGN", value: ign },
+          { name: "Reason", value: reason },
+          { name: "Evidence", value: links },
+          { name: "Reporter Email", value: email }
+        ];
       } else if (type === "discord") {
         const username = document.getElementById("dcUsername").value.trim();
         const reason = document.getElementById("dcReason").value.trim();
         const links = document.getElementById("dcLinks").value.trim();
         const email = document.getElementById("dcEmail").value.trim();
 
-        if (!username || !reason || !links || !email) {
-          status.textContent = "❌ Please fill out all fields.";
+        if (!username || !reason || !links || !email || !isValidURL(links)) {
+          status.textContent = "❌ All fields required. Links must be valid URLs.";
           status.classList.add("error");
           return;
         }
 
-        content = `💬 **Discord Report**\nUsername: ${username}\nReason: ${reason}\nLinks: ${links}\nReporter Email: ${email}`;
+        embed.title = "💬 Discord Report";
+        embed.fields = [
+          { name: "Discord Username", value: username },
+          { name: "Reason", value: reason },
+          { name: "Evidence", value: links },
+          { name: "Reporter Email", value: email }
+        ];
       } else {
-        status.textContent = "❌ Please select a report type.";
+        status.textContent = "❌ Select a report type.";
         status.classList.add("error");
         return;
       }
 
-      const webhookURL = "https://discord.com/api/webhooks/1395212686584975370/K3ITQfxKNXdvXelUxBEPfxfgn0mlXDs3ExBUD9kqK-8TpS8SjmgoznV3at7HNQ31XBLP"; // Replace with your actual Discord webhook URL
+      const webhookURL = "https://discord.com/api/webhooks/1395212686584975370/K3ITQfxKNXdvXelUxBEPfxfgn0mlXDs3ExBUD9kqK-8TpS8SjmgoznV3at7HNQ31XBLP"; // Replace with your webhook
 
       fetch(webhookURL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content })
+        body: JSON.stringify({ embeds: [embed] })
       })
       .then(() => {
-        status.textContent = "✅ Report successfully sent!";
+        status.textContent = "✅ Report sent successfully!";
         status.classList.add("success");
         lastSubmitted = Date.now();
       })
@@ -189,4 +208,3 @@
 
 </body>
 </html>
-
