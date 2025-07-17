@@ -55,7 +55,13 @@
       transition: background 0.3s;
     }
 
-    button.submit:hover {
+    button.submit:disabled {
+      background: #444;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    button.submit:hover:enabled {
       background: #222;
     }
 
@@ -67,8 +73,8 @@
       display: none;
     }
 
-    .accepted { color: lime; }
-    .denied { color: red; }
+    .success { color: lime; }
+    .error { color: red; }
   </style>
 </head>
 <body>
@@ -88,7 +94,7 @@
       <textarea id="reason" placeholder="Reason for report" required></textarea>
       <input type="text" id="links" placeholder="Evidence links (YouTube, screenshots)" required />
       <input type="email" id="email" placeholder="Your email" required />
-      <button class="submit" onclick="submitReport()">Submit Report</button>
+      <button class="submit" id="submitBtn" onclick="submitReport()">Submit Report</button>
     </div>
 
     <div id="discordForm" style="display:none;">
@@ -96,13 +102,16 @@
       <textarea id="dcReason" placeholder="Reason for report" required></textarea>
       <input type="text" id="dcLinks" placeholder="Evidence links" required />
       <input type="email" id="dcEmail" placeholder="Your email" required />
-      <button class="submit" onclick="submitReport()">Submit Report</button>
+      <button class="submit" id="submitBtn2" onclick="submitReport()">Submit Report</button>
     </div>
 
     <div id="reportStatus"></div>
   </div>
 
   <script>
+    const cooldownTime = 300000; // 5 minutes in milliseconds
+    let lastSubmitted = 0;
+
     function showSubForm() {
       const type = document.getElementById("reportType").value;
       document.getElementById("ingameForm").style.display = type === "ingame" ? "block" : "none";
@@ -110,21 +119,74 @@
     }
 
     function submitReport() {
+      const now = Date.now();
+      const elapsed = now - lastSubmitted;
+
       const status = document.getElementById("reportStatus");
       status.style.display = "block";
       status.className = "";
 
-      // Simulated feedback
-      const accepted = Math.random() > 0.5;
-      if (accepted) {
-        status.textContent = "✅ Report Accepted!";
-        status.classList.add("accepted");
-      } else {
-        status.textContent = "❌ Report Denied.";
-        status.classList.add("denied");
+      if (elapsed < cooldownTime) {
+        const secondsLeft = Math.ceil((cooldownTime - elapsed) / 1000);
+        status.textContent = `⏳ Please wait ${secondsLeft} more seconds before submitting another report.`;
+        status.classList.add("error");
+        return;
       }
+
+      const type = document.getElementById("reportType").value;
+      let content = "";
+
+      if (type === "ingame") {
+        const ign = document.getElementById("ign").value.trim();
+        const reason = document.getElementById("reason").value.trim();
+        const links = document.getElementById("links").value.trim();
+        const email = document.getElementById("email").value.trim();
+
+        if (!ign || !reason || !links || !email) {
+          status.textContent = "❌ Please fill out all fields.";
+          status.classList.add("error");
+          return;
+        }
+
+        content = `🕹️ **Ingame Report**\nIGN: ${ign}\nReason: ${reason}\nLinks: ${links}\nReporter Email: ${email}`;
+      } else if (type === "discord") {
+        const username = document.getElementById("dcUsername").value.trim();
+        const reason = document.getElementById("dcReason").value.trim();
+        const links = document.getElementById("dcLinks").value.trim();
+        const email = document.getElementById("dcEmail").value.trim();
+
+        if (!username || !reason || !links || !email) {
+          status.textContent = "❌ Please fill out all fields.";
+          status.classList.add("error");
+          return;
+        }
+
+        content = `💬 **Discord Report**\nUsername: ${username}\nReason: ${reason}\nLinks: ${links}\nReporter Email: ${email}`;
+      } else {
+        status.textContent = "❌ Please select a report type.";
+        status.classList.add("error");
+        return;
+      }
+
+      const webhookURL = "https://discord.com/api/webhooks/1395212686584975370/K3ITQfxKNXdvXelUxBEPfxfgn0mlXDs3ExBUD9kqK-8TpS8SjmgoznV3at7HNQ31XBLP"; // Replace with your actual Discord webhook URL
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content })
+      })
+      .then(() => {
+        status.textContent = "✅ Report successfully sent!";
+        status.classList.add("success");
+        lastSubmitted = Date.now();
+      })
+      .catch(() => {
+        status.textContent = "❌ Failed to send report.";
+        status.classList.add("error");
+      });
     }
   </script>
 
 </body>
 </html>
+
