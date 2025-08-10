@@ -4,190 +4,121 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ZyroNetwork</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
     body {
       margin: 0;
+      height: 100vh;
+      overflow: hidden;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #0f172a, #1e293b, #000);
-      color: #f1f5f9;
-    }
-    header {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #cbd5e1;
-    }
-    nav a:hover {
       color: white;
+      text-align: center;
+      background: #0d0d0d;
     }
-    .btn {
-      background: #10b981;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 12px;
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .content {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 3rem;
+      margin: 10px 0;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    .ip, .discord {
+      font-size: 1rem;
+      margin: 10px 0;
+    }
+    .discord a {
+      color: #00aaff;
+      text-decoration: none;
       font-weight: bold;
-      text-decoration: none;
     }
-    .hero {
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-      align-items: center;
-    }
-    .hero img {
-      width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-    .section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-    .grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-    .card {
-      background: rgba(30,41,59,0.4);
-      padding: 20px;
-      border-radius: 16px;
-    }
-    footer {
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
-      border-top: 1px solid #1e293b;
-    }
-    footer a {
-      background: rgba(71,85,105,0.6);
-      padding: 8px 16px;
-      border-radius: 8px;
-      margin-right: 8px;
-      color: #f1f5f9;
-      text-decoration: none;
-    }
-    footer a:hover {
-      background: rgba(71,85,105,0.8);
+    .discord a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+  <canvas id="particles"></canvas>
+  <div class="content animate__animated animate__fadeIn">
+    <img src="zyro.png" alt="ZyroNetwork Logo" class="logo"/>
+    <h1>ZyroNetwork</h1>
+    <p>Skyblock • GStuff PvP Only</p>
+    <div class="ip">IP: play.zyronetwork.net | Port: 19132</div>
+    <div class="discord">Join our Discord: <a href="https://discord.zyronetwork.net/" target="_blank">discord.zyronetwork.net</a></div>
+  </div>
 
-  <!-- NAVBAR -->
-  <header>
-    <div class="logo">
-      <img src="zyronetwork-logo.png" alt="ZyroNetwork Logo" style="height:50px;">
-    </div>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#servers">Servers</a>
-      <a href="#staff">Staff</a>
-      <a href="#faq">FAQ</a>
-      <a href="#" class="btn">Join Now</a>
-    </nav>
-  </header>
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
 
-  <!-- HERO -->
-  <section class="hero">
-    <div>
-      <h2 style="font-size: 32px; font-weight: bold;">Play. Build. Survive. — Join ZyroNetwork</h2>
-      <p style="color:#cbd5e1;">A friendly, active Minecraft community with survival, creative, and minigame experiences.</p>
-      <p>IP: <b>play.zyronetwork.net:19132</b></p>
-      <a href="#servers" class="btn">Play Now</a>
-    </div>
-    <div>
-      <img src="hero.jpg" alt="Zyro hero">
-    </div>
-  </section>
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-  <!-- FEATURES -->
-  <section id="features" class="section">
-    <h3>What we offer</h3>
-    <div class="grid">
-      <div class="card">
-        <h4>Vanilla Survival</h4>
-        <p>Balanced survival experience with custom events.</p>
-      </div>
-      <div class="card">
-        <h4>Minigames</h4>
-        <p>Fun minigames like parkour, spleef, and more.</p>
-      </div>
-      <div class="card">
-        <h4>Active Staff</h4>
-        <p>Friendly staff and fair gameplay.</p>
-      </div>
-    </div>
-  </section>
+    const particlesArray = [];
+    const colors = ['#00ff99', '#00aaff', '#ffffff'];
 
-  <!-- SERVERS -->
-  <section id="servers" class="section">
-    <h3>Servers</h3>
-    <div class="grid">
-      <div class="card">
-        <h4>Zyro Survival</h4>
-        <p>IP: play.zyronetwork.net:19132</p>
-      </div>
-      <div class="card">
-        <h4>Zyro Minigames</h4>
-        <p>IP: minigames.zyronetwork.net:19133</p>
-      </div>
-      <div class="card">
-        <h4>Creative</h4>
-        <p>IP: creative.zyronetwork.net:19134</p>
-      </div>
-    </div>
-  </section>
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
 
-  <!-- STAFF -->
-  <section id="staff" class="section">
-    <h3>Staff & Community</h3>
-    <div class="grid">
-      <div class="card" style="text-align:center;">
-        <img src="staff1.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
-        <p><b>Aurora</b><br><span style="color:#94a3b8;">Head Admin</span></p>
-      </div>
-      <div class="card" style="text-align:center;">
-        <img src="staff2.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
-        <p><b>Kyro</b><br><span style="color:#94a3b8;">Community Lead</span></p>
-      </div>
-      <div class="card" style="text-align:center;">
-        <img src="staff3.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
-        <p><b>Mika</b><br><span style="color:#94a3b8;">Events Manager</span></p>
-      </div>
-    </div>
-  </section>
+    function init() {
+      for (let i = 0; i < 100; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
 
-  <!-- FOOTER -->
-  <footer id="faq">
-    <div>
-      <h4>Contact</h4>
-      <p>Email: support@zyronetwork.net</p>
-      <a href="#">Discord</a>
-      <a href="#">Store</a>
-      <a href="#">Forum</a>
-    </div>
-    <p style="color:#64748b; font-size:12px; text-align:center; margin-top:20px;">
-      © 2025 ZyroNetwork — Built with love.
-    </p>
-  </footer>
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
 
+    init();
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
 
