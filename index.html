@@ -1,92 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ZyroNetwork</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background: url('https://i.postimg.cc/C5LHWMQw/rtx.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: white;
-      background: #0d0d0d;
-      overflow-x: hidden;
       text-align: center;
+      cursor: url('https://i.postimg.cc/3xL6bt1K/diamond_pickaxe.png'), auto;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: -1;
     }
 
-    /* Hero Section like NetherGames */
-    .hero {
-      position: relative;
-      background: url('zyro-bg.jpg') center/cover no-repeat;
-      height: 100vh;
+    /* Fixed Nav Bar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      text-shadow: 0px 2px 6px rgba(0,0,0,0.8);
+      gap: 30px;
+      padding: 15px 0;
+      z-index: 999;
+      backdrop-filter: blur(5px);
     }
-    .hero img {
-      max-width: 200px;
+    nav a {
+      color: #ffcc00;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: color 0.3s;
     }
-    .hero p {
-      font-size: 1.2rem;
+    nav a:hover {
+      color: white;
+    }
+
+    header {
+      padding: 100px 0 20px 0;
+    }
+    header img {
+      max-width: 220px;
+      border-radius: 10px;
+    }
+    .tagline {
       margin-top: 10px;
+      font-size: 1.2em;
+      color: #ccc;
     }
     .changing-text {
-      font-size: 3rem;
+      font-size: 3em;
       font-weight: bold;
-      margin: 20px 0;
+      color: #ffcc00;
+      min-height: 60px;
     }
     .launch-btn {
-      display: inline-block;
-      background: #ff9900;
-      color: white;
+      background: #ffcc00;
+      color: black;
       padding: 15px 30px;
+      font-size: 1.2em;
       border-radius: 8px;
-      font-size: 1.2rem;
       text-decoration: none;
-      transition: background 0.3s;
+      display: inline-block;
+      margin-top: 20px;
+      transition: 0.3s;
     }
     .launch-btn:hover {
-      background: #e68a00;
+      background: #e6b800;
     }
-    .ip-info {
-      margin-top: 20px;
-      font-size: 1rem;
+    .server-info {
+      margin-top: 15px;
+      font-size: 1em;
+      color: #aaa;
+    }
+    .game-section {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 40px auto;
+      max-width: 1200px;
+    }
+    .game-card {
+      background: rgba(0,0,0,0.85);
+      border-radius: 10px;
+      overflow: hidden;
+      width: 350px;
+      text-align: left;
+      transition: transform 0.3s;
+    }
+    .game-card:hover {
+      transform: scale(1.03);
+    }
+    .game-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      border: none;
+    }
+    .game-card-content {
+      padding: 15px;
+    }
+    .game-card-content h3 {
+      margin: 0;
+      color: #ffcc00;
+    }
+    .game-card-content p {
+      margin: 5px 0;
+      color: #ccc;
+    }
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
     }
 
-    footer {
-      background: rgba(0,0,0,0.85);
-      padding: 20px;
-      color: white;
+    /* Cursor Trail */
+    .trail {
+      position: fixed;
+      width: 16px;
+      height: 16px;
+      background: url('https://i.postimg.cc/3xL6bt1K/diamond_pickaxe.png') no-repeat center;
+      background-size: contain;
+      pointer-events: none;
+      animation: fade 0.5s linear forwards;
+    }
+    @keyframes fade {
+      to { opacity: 0; transform: scale(0.5); }
     }
   </style>
 </head>
 <body>
 
-<!-- Hero Section -->
-<div class="hero">
-  <img src="zyro.png" alt="ZyroNetwork Logo">
-  <p>All for one. All for fun. Play</p>
-  <div class="changing-text" id="gameMode">Skyblock</div>
-  <a href="minecraft://?addExternalServer=ZyroNetwork|play.zyronetwork.net:19132" class="launch-btn">Launch Minecraft →</a>
-  <div class="ip-info">And connect to <strong>play.zyronetwork.net</strong> (19132)</div>
-</div>
+<canvas id="particles"></canvas>
 
-<footer>
-  <p>&copy; 2025 ZyroNetwork — Skyblock | GStuff PvP Only</p>
-</footer>
+<!-- Fixed Nav -->
+<nav>
+  <a href="discord.html">Discord</a>
+  <a href="vote.html">Vote</a>
+  <a href="forums.html">Forums</a>
+</nav>
 
-<!-- Changing Text Script -->
+<header>
+  <img src="https://i.postimg.cc/G2DZHKL4/zyro.jpg" alt="ZyroNetwork Logo">
+  <div class="tagline">All for one. All for fun. Play</div>
+  <div class="changing-text" id="changingText">Skyblock</div>
+  <a href="#" class="launch-btn">Launch Minecraft →</a>
+  <div class="server-info">
+    And connect to <strong>play.zyronetwork.net</strong> (Port: 19132)
+  </div>
+</header>
+
+<section class="game-section">
+
+  <!-- Skyblock -->
+  <div class="game-card">
+    <img src="https://i.postimg.cc/zfv7fFwT/Screenshot-2025-08-09-225837.png" alt="Skyblock">
+    <div class="game-card-content">
+      <h3>Skyblock</h3>
+      <p><strong>IP:</strong> play.zyronetwork.net</p>
+      <p><strong>Port:</strong> 19132</p>
+      <p>Survive and expand your floating island in the sky.</p>
+    </div>
+  </div>
+
+  <!-- GStuff PvP -->
+  <div class="game-card">
+    <img src="https://i.postimg.cc/dQfYQ58j/Screenshot-2025-08-10-203733.png" alt="GStuff PvP">
+    <div class="game-card-content">
+      <h3>GStuff PvP</h3>
+      <p><strong>IP:</strong> play.zyronetwork.net</p>
+      <p><strong>Port:</strong> 19132</p>
+      <p>Fast-paced PvP action with custom kits and arenas.</p>
+    </div>
+  </div>
+
+</section>
+
 <script>
-  const gameModes = ["Skyblock", "GStuff PvP Only"];
-  let index = 0;
-  const textElement = document.getElementById("gameMode");
+/* Text Changer */
+const texts = ["Skyblock", "GStuff PvP Only", "Events & More"];
+let index = 0;
+setInterval(() => {
+  document.getElementById("changingText").textContent = texts[index];
+  index = (index + 1) % texts.length;
+}, 2000);
 
-  setInterval(() => {
-    index = (index + 1) % gameModes.length;
-    textElement.textContent = gameModes[index];
-  }, 2500);
+/* Particle Background */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+for (let i = 0; i < 100; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 3 + 1,
+    dx: (Math.random() - 0.5) * 1,
+    dy: (Math.random() - 0.5) * 1
+  });
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function updateParticles() {
+  particles.forEach(p => {
+    p.x += p.dx;
+    p.y += p.dy;
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  });
+}
+
+function animate() {
+  drawParticles();
+  updateParticles();
+  requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+/* Cursor Trail */
+document.addEventListener("mousemove", e => {
+  const trail = document.createElement("div");
+  trail.className = "trail";
+  trail.style.left = (e.pageX - 8) + "px";
+  trail.style.top = (e.pageY - 8) + "px";
+  document.body.appendChild(trail);
+  setTimeout(() => { trail.remove(); }, 500);
+});
 </script>
 
 </body>
