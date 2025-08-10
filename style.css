@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.hero {
+  position: relative;
+  background: url('images/minecraft-bg.jpg') center/cover no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero .overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  z-index: 1;
+}
+
+.server-ip {
+  margin-top: 20px;
+}
+
+.server-ip button {
+  background: #4CAF50;
+  border: none;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.features {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feature {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  width: 250px;
+}
+
+.feature img {
+  width: 100px;
+  height: auto;
+}
+
+.join {
+  background: #333;
+  padding: 40px;
+  text-align: center;
+}
+
+.discord-btn {
+  background: #5865F2;
+  color: white;
+  padding: 15px 20px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+footer {
+  background: #111;
+  padding: 10px;
+  text-align: center;
+}
