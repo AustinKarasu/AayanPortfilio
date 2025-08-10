@@ -1,409 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Minecraft Server</title>
-    <link href="https://fonts.googleapis.com/css2?family=Minecraft&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --dark: #1a1a1a;
-            --light: #f5f5f5;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--dark);
-            color: var(--light);
-            line-height: 1.6;
-        }
-        
-        .minecraft-font {
-            font-family: 'Minecraft', sans-serif;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-        
-        .logo {
-            font-size: 2rem;
-            color: var(--secondary);
-            font-weight: bold;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav li {
-            margin: 0 1rem;
-        }
-        
-        nav a {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-        }
-        
-        nav a:hover {
-            color: var(--secondary);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1607513746994-51f730a44832?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 2rem;
-        }
-        
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-        
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 800px;
-            margin-bottom: 2rem;
-        }
-        
-        /* Server Status */
-        .server-status {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 1.5rem 2.5rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-            border: 2px solid var(--secondary);
-        }
-        
-        .status-indicator {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        
-        .online {
-            background-color: #2ecc71;
-        }
-        
-        .offline {
-            background-color: #e74c3c;
-        }
-        
-        .server-ip {
-            font-size: 1.3rem;
-            margin: 1rem 0;
-        }
-        
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary);
-            color: white;
-            padding: 0.8rem 1.8rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            margin: 0.5rem;
-        }
-        
-        .btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn-accent {
-            background-color: var(--accent);
-        }
-        
-        .btn-accent:hover {
-            background-color: #c0392b;
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 5rem 2rem;
-            text-align: center;
-            background-color: #222;
-        }
-        
-        .features h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--secondary);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .feature-card {
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 2rem;
-            border-radius: 8px;
-            transition: transform 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--secondary);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #111;
-            padding: 2rem;
-            text-align: center;
-        }
-        
-        .social-links {
-            margin: 1rem 0;
-        }
-        
-        .social-links a {
-            color: var(--light);
-            font-size: 1.5rem;
-            margin: 0 0.5rem;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: var(--secondary);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .logo {
-                margin-bottom: 1rem;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav li {
-                margin: 0.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZyroNetwork</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f172a, #1e293b, #000);
+      color: #f1f5f9;
+    }
+    header {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    header .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(to bottom right, #22c55e, #10b981);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #cbd5e1;
+    }
+    nav a:hover {
+      color: white;
+    }
+    .btn {
+      background: #10b981;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      align-items: center;
+    }
+    .hero img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .card {
+      background: rgba(30,41,59,0.4);
+      padding: 20px;
+      border-radius: 16px;
+    }
+    footer {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+      border-top: 1px solid #1e293b;
+    }
+    footer a {
+      background: rgba(71,85,105,0.6);
+      padding: 8px 16px;
+      border-radius: 8px;
+      margin-right: 8px;
+      color: #f1f5f9;
+      text-decoration: none;
+    }
+    footer a:hover {
+      background: rgba(71,85,105,0.8);
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo minecraft-font">SkyBlock Network</div>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="/store">Store</a></li>
-                <li><a href="/vote">Vote</a></li>
-                <li><a href="/stats">Stats</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1 class="minecraft-font">Welcome to SkyBlock Network</h1>
-        <p>The ultimate Minecraft SkyBlock experience with custom islands, economy, and more!</p>
-        
-        <div class="server-status">
-            <h2>
-                <span class="status-indicator online"></span>
-                <span id="status">Online</span>
-            </h2>
-            <p>Players Online: <span id="player-count">127</span>/500</p>
-            <p class="server-ip">IP: <strong>play.skyblocknetwork.com</strong></p>
-        </div>
-        
-        <div class="hero-buttons">
-            <a href="minecraft://?addServer=play.skyblocknetwork.com" class="btn">
-                <i class="fas fa-plus"></i> Add to Server List
-            </a>
-            <a href="/store" class="btn btn-accent">
-                <i class="fas fa-shopping-cart"></i> Visit Store
-            </a>
-        </div>
-    </section>
+  <!-- NAVBAR -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">Z</div>
+      <div>
+        <h1>ZyroNetwork</h1>
+        <p style="color:#94a3b8; font-size: 12px;">Vanilla | Minigames | Survival</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#servers">Servers</a>
+      <a href="#staff">Staff</a>
+      <a href="#faq">FAQ</a>
+      <a href="#" class="btn">Join Now</a>
+    </nav>
+  </header>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <h2 class="minecraft-font">Server Features</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-cloud"></i>
-                </div>
-                <h3>SkyBlock 2.0</h3>
-                <p>Our custom SkyBlock experience with unique challenges, upgrades, and progression systems.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3>Co-op Islands</h3>
-                <p>Play with friends on shared islands and work together to build the ultimate SkyBlock base.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-coins"></i>
-                </div>
-                <h3>Player Economy</h3>
-                <p>Buy, sell, and trade with other players using our robust economy system.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <h3>Weekly Events</h3>
-                <p>Participate in special events with unique rewards and challenges.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>Anti-Cheat</h3>
-                <p>Advanced protection against hackers and cheaters for a fair gameplay experience.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3>Cross-Platform</h3>
-                <p>Play with friends whether they're on Java or Bedrock edition.</p>
-            </div>
-        </div>
-    </section>
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <h2 style="font-size: 32px; font-weight: bold;">Play. Build. Survive. — Join ZyroNetwork</h2>
+      <p style="color:#cbd5e1;">A friendly, active Minecraft community with survival, creative, and minigame experiences.</p>
+      <p>IP: <b>play.zyronetwork.net:19132</b></p>
+      <a href="#servers" class="btn">Play Now</a>
+    </div>
+    <div>
+      <img src="hero.jpg" alt="Zyro hero">
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="logo minecraft-font">SkyBlock Network</div>
-        <p>The best Minecraft SkyBlock experience since 2023</p>
-        
-        <div class="social-links">
-            <a href="https://discord.gg/yourserver" target="_blank"><i class="fab fa-discord"></i></a>
-            <a href="https://twitter.com/yourserver" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://youtube.com/yourserver" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://instagram.com/yourserver" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
-        
-        <p>&copy; 2023 SkyBlock Network. All rights reserved.</p>
-        <p>Not affiliated with Mojang or Microsoft.</p>
-    </footer>
+  <!-- FEATURES -->
+  <section id="features" class="section">
+    <h3>What we offer</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Vanilla Survival</h4>
+        <p>Balanced survival experience with custom events.</p>
+      </div>
+      <div class="card">
+        <h4>Minigames</h4>
+        <p>Fun minigames like parkour, spleef, and more.</p>
+      </div>
+      <div class="card">
+        <h4>Active Staff</h4>
+        <p>Friendly staff and fair gameplay.</p>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Server status checker
-        async function checkServerStatus() {
-            try {
-                // Replace with your actual server IP
-                const response = await fetch('https://api.mcsrvstat.us/2/play.skyblocknetwork.com');
-                const data = await response.json();
-                
-                const statusElement = document.getElementById('status');
-                const playerCountElement = document.getElementById('player-count');
-                const statusIndicator = document.querySelector('.status-indicator');
-                
-                if(data.online) {
-                    statusElement.textContent = 'Online';
-                    playerCountElement.textContent = data.players.online;
-                    statusIndicator.className = 'status-indicator online';
-                } else {
-                    statusElement.textContent = 'Offline';
-                    playerCountElement.textContent = '0';
-                    statusIndicator.className = 'status-indicator offline';
-                }
-            } catch (error) {
-                console.error('Error checking server status:', error);
-            }
-        }
-        
-        // Check status on load and every minute
-        checkServerStatus();
-        setInterval(checkServerStatus, 60000);
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+  <!-- SERVERS -->
+  <section id="servers" class="section">
+    <h3>Servers</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Zyro Survival</h4>
+        <p>IP: play.zyronetwork.net:19132</p>
+      </div>
+      <div class="card">
+        <h4>Zyro Minigames</h4>
+        <p>IP: minigames.zyronetwork.net:19133</p>
+      </div>
+      <div class="card">
+        <h4>Creative</h4>
+        <p>IP: creative.zyronetwork.net:19134</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAFF -->
+  <section id="staff" class="section">
+    <h3>Staff & Community</h3>
+    <div class="grid">
+      <div class="card" style="text-align:center;">
+        <img src="staff1.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
+        <p><b>Aurora</b><br><span style="color:#94a3b8;">Head Admin</span></p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <img src="staff2.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
+        <p><b>Kyro</b><br><span style="color:#94a3b8;">Community Lead</span></p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <img src="staff3.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
+        <p><b>Mika</b><br><span style="color:#94a3b8;">Events Manager</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="faq">
+    <div>
+      <h4>Contact</h4>
+      <p>Email: support@zyronetwork.net</p>
+      <a href="#">Discord</a>
+      <a href="#">Store</a>
+      <a href="#">Forum</a>
+    </div>
+    <p style="color:#64748b; font-size:12px; text-align:center; margin-top:20px;">
+      © 2025 ZyroNetwork — Built with love.
+    </p>
+  </footer>
+
 </body>
 </html>
