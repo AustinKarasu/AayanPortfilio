@@ -1,141 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZyroNetwork</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #000;
-            color: white;
-        }
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
-        }
-        header nav a {
-            color: white;
-            margin: 0 10px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .hero {
-            height: 100vh;
-            background: url('https://i.postimg.cc/G2DZHKL4/zyro.jpg') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
-        .hero img {
-            max-width: 200px;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            margin: 20px 0 10px;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        .btn {
-            background: orange;
-            color: black;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background: darkorange;
-        }
-        .discord-section {
-            background: #3b5ef0;
-            padding: 50px 20px;
-            text-align: center;
-        }
-        footer {
-            background: black;
-            color: #aaa;
-            padding: 20px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-        footer a {
-            color: orange;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZyroNetwork</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: #0d0d0d;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 40px 0 20px 0;
+    }
+    header img {
+      max-width: 220px;
+    }
+    h1 {
+      margin-top: 10px;
+      font-size: 2.5em;
+    }
+    .server-info {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .game-modes {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+    .mode-card {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 255, 150, 0.5);
+    }
+    .mode-card h2 {
+      margin-bottom: 10px;
+      color: #00ff99;
+    }
+    footer {
+      background: rgba(0,0,0,0.85);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      color: white;
+      flex-wrap: wrap;
+    }
+    .footer-info {
+      flex: 1;
+      min-width: 200px;
+    }
+    .footer-discord {
+      width: 350px;
+      height: 250px;
+      overflow-y: scroll;
+      background: #111;
+      border-radius: 8px;
+      padding: 5px;
+    }
+    /* Particle canvas style */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
 </head>
 <body>
 
+<!-- Particle Background -->
+<div id="particles-js"></div>
+
 <header>
-    <div class="logo">
-        <img src="zyro.png" alt="ZyroNetwork Logo" style="height:50px;">
-    </div>
-    <nav>
-        <a href="#">Portal</a>
-        <a href="#">Store</a>
-        <a href="#">Vote</a>
-    </nav>
-    <nav>
-        <a href="https://discord.zyronetwork.net/">Discord</a>
-        <a href="#">Helpdesk</a>
-        <a href="#">Support</a>
-    </nav>
+  <img src="zyro.png" alt="ZyroNetwork Logo">
+  <h1>Welcome to ZyroNetwork</h1>
 </header>
 
-<section class="hero">
-    <img src="zyro.png" alt="ZyroNetwork Logo">
-    <p>All for one. All for fun. Play</p>
-    <h1>ZyroNetwork</h1>
-    <a class="btn" href="#">Launch Minecraft →</a>
-    <p>And connect to <b>play.zyronetwork.net</b> (19132)</p>
+<section class="server-info">
+  <h2>IP: play.zyronetwork.net</h2>
+  <h3>Port: 19132</h3>
 </section>
 
-<section class="discord-section">
-    <h2>Join our Discord server</h2>
-    <p>Chat with other players, submit feedback, report bugs, and more!</p>
-    <p>Join our amazing community today.</p>
-    <a class="btn" href="https://discord.zyronetwork.net/">Open Discord</a>
+<section class="game-modes">
+  <div class="mode-card">
+    <h2>Skyblock</h2>
+    <p>Build your island, gather resources, and rise to the top.</p>
+  </div>
+  <div class="mode-card">
+    <h2>GStuff PvP Only</h2>
+    <p>Fast-paced PvP battles with the best gear.</p>
+  </div>
 </section>
 
 <footer>
-    <div>
-        <h4>Social</h4>
-        <a href="#">Facebook</a><br>
-        <a href="#">Instagram</a><br>
-        <a href="#">TikTok</a><br>
-        <a href="#">Twitter</a>
-    </div>
-    <div>
-        <h4>Support</h4>
-        <a href="#">Helpdesk</a><br>
-        <a href="#">Contact Us</a><br>
-        <a href="#">Security</a>
-    </div>
-    <div>
-        <h4>Legal</h4>
-        <a href="#">Terms of Service</a><br>
-        <a href="#">Privacy Policy</a><br>
-        <a href="#">Refund Policy</a>
-    </div>
+  <div class="footer-info">
+    <h3>ZyroNetwork</h3>
+    <p>IP: <strong>play.zyronetwork.net</strong> (Port: 19132)</p>
+    <p>Skyblock | GStuff PvP Only</p>
+    <p><a href="https://discord.zyronetwork.net/" target="_blank" style="color:#00ff99;">Join our Discord</a></p>
+    <p>&copy; 2025 ZyroNetwork. All rights reserved.</p>
+  </div>
+  <div class="footer-discord">
+    <iframe src="https://discord.com/widget?id=1365466995700531200&theme=dark"
+      width="100%" height="500" allowtransparency="true" frameborder="0"
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    </iframe>
+  </div>
 </footer>
+
+<!-- Particle.js Library -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 80 },
+    "size": { "value": 3 },
+    "move": { "speed": 1 },
+    "line_linked": { "enable": true },
+    "color": { "value": "#00ff99" }
+  }
+});
+</script>
 
 </body>
 </html>
-
