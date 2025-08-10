@@ -1,112 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ZyroNetwork</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ZyroNetwork — Play. Build. Survive.</title>
+  <meta name="description" content="ZyroNetwork — Vanilla, Minigames & Survival Minecraft servers. IP: play.zyronetwork.net:19132">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #0f172a, #1e293b, #000);
-      color: #f1f5f9;
-    }
-    header {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    header .logo-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(to bottom right, #22c55e, #10b981);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #cbd5e1;
-    }
-    nav a:hover {
-      color: white;
-    }
-    .btn {
-      background: #10b981;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .hero {
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-      align-items: center;
-    }
-    .hero img {
-      width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-    .section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-    .grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-    .card {
-      background: rgba(30,41,59,0.4);
-      padding: 20px;
-      border-radius: 16px;
-    }
-    footer {
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
-      border-top: 1px solid #1e293b;
-    }
-    footer a {
-      background: rgba(71,85,105,0.6);
-      padding: 8px 16px;
-      border-radius: 8px;
-      margin-right: 8px;
-      color: #f1f5f9;
-      text-decoration: none;
-    }
-    footer a:hover {
-      background: rgba(71,85,105,0.8);
-    }
+    :root{--accent:#6ee7b7;--bg:#0b1020;--card:#0f1724;--muted:#9aa4be}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#05060a 0%, #071026 100%);color:#e6eef8;-webkit-font-smoothing:antialiased}
+    header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;max-width:1100px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;background:linear-gradient(135deg,#3b82f6,#06b6d4);display:grid;place-items:center;border-radius:10px;font-weight:700;color:#071026}
+    nav a{color:var(--muted);text-decoration:none;margin:0 10px;font-weight:600}
+    .cta{background:var(--accent);color:#071026;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    .hero{max-width:1100px;margin:28px auto;padding:44px;border-radius:14px;display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
+    .hero .left h1{font-size:42px;margin:0 0 10px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .cta-row{display:flex;gap:12px}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:12px}
+    .features{display:flex;gap:12px;margin-top:18px}
+    .feature{flex:1}
+    .servers{max-width:1100px;margin:26px auto;padding:0 20px}
+    .server-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .server-item{padding:14px;border-radius:10px;background:var(--card);border:1px solid rgba(255,255,255,0.03)}
+
+    .staff{max-width:1100px;margin:26px auto;padding:0 20px}
+    .staff-grid{display:flex;gap:14px;flex-wrap:wrap}
+    .staff-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:10px;min-width:180px}
+    .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#06b6d4,#3b82f6);display:inline-block}
+
+    footer{max-width:1100px;margin:40px auto 80px;padding:0 20px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+
+    @media (max-width:880px){.hero{grid-template-columns:1fr;}.hero .left h1{font-size:32px}}
   </style>
 </head>
 <body>
-
-  <!-- NAVBAR -->
   <header>
-    <div class="logo">
-      <div class="logo-icon">Z</div>
+    <div class="brand">
+      <div class="logo">ZY</div>
       <div>
-        <h1>ZyroNetwork</h1>
-        <p style="color:#94a3b8; font-size: 12px;">Vanilla | Minigames | Survival</p>
+        <div style="font-weight:800;font-size:16px">ZyroNetwork</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Vanilla • Minigames • Survival</div>
       </div>
     </div>
     <nav>
@@ -114,93 +51,120 @@
       <a href="#servers">Servers</a>
       <a href="#staff">Staff</a>
       <a href="#faq">FAQ</a>
-      <a href="#" class="btn">Join Now</a>
+      <a class="cta" href="#join">Join Now</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div>
-      <h2 style="font-size: 32px; font-weight: bold;">Play. Build. Survive. — Join ZyroNetwork</h2>
-      <p style="color:#cbd5e1;">A friendly, active Minecraft community with survival, creative, and minigame experiences.</p>
-      <p>IP: <b>play.zyronetwork.net:19132</b></p>
-      <a href="#servers" class="btn">Play Now</a>
-    </div>
-    <div>
-      <img src="hero.jpg" alt="Zyro hero">
-    </div>
-  </section>
+  <main>
+    <section class="hero" role="banner">
+      <div class="left">
+        <h1>Play. Build. Survive. — Join ZyroNetwork</h1>
+        <p>Join a friendly, active Minecraft community with survival, creative, and minigame experiences. Balanced gameplay, regular events and an active staff team.</p>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <strong>IP</strong>
+              <div style="font-weight:800">play.zyronetwork.net:19132</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:12px;color:var(--muted)">Status</div>
+              <div style="font-weight:700;color:var(--accent)">Online</div>
+            </div>
+          </div>
+          <div class="features" style="margin-top:12px">
+            <div class="feature"><strong>Vanilla Survival</strong><div style="color:var(--muted);font-size:13px">Balanced survival experience with custom events.</div></div>
+            <div class="feature"><strong>Minigames</strong><div style="color:var(--muted);font-size:13px">Parkour, spleef and more.</div></div>
+            <div class="feature"><strong>Active Staff</strong><div style="color:var(--muted);font-size:13px">Friendly staff and fair gameplay.</div></div>
+          </div>
+        </div>
+        <div class="cta-row" style="margin-top:14px">
+          <a class="cta" href="#join">Play Now</a>
+          <a style="background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:700" href="#discord">Discord</a>
+        </div>
+      </div>
 
-  <!-- FEATURES -->
-  <section id="features" class="section">
-    <h3>What we offer</h3>
-    <div class="grid">
-      <div class="card">
-        <h4>Vanilla Survival</h4>
-        <p>Balanced survival experience with custom events.</p>
-      </div>
-      <div class="card">
-        <h4>Minigames</h4>
-        <p>Fun minigames like parkour, spleef, and more.</p>
-      </div>
-      <div class="card">
-        <h4>Active Staff</h4>
-        <p>Friendly staff and fair gameplay.</p>
-      </div>
-    </div>
-  </section>
+      <aside class="card" style="text-align:center">
+        <div style="height:200px;display:grid;place-items:center;font-weight:800;font-size:18px;color:var(--muted)">Zyro Hero Image</div>
+        <div style="margin-top:12px;color:var(--muted);font-size:13px">Connect via IP: <strong>play.zyronetwork.net:19132</strong></div>
+      </aside>
+    </section>
 
-  <!-- SERVERS -->
-  <section id="servers" class="section">
-    <h3>Servers</h3>
-    <div class="grid">
-      <div class="card">
-        <h4>Zyro Survival</h4>
-        <p>IP: play.zyronetwork.net:19132</p>
+    <section id="servers" class="servers">
+      <h2 style="margin:0 0 12px">Servers</h2>
+      <div class="server-grid">
+        <div class="server-item card">
+          <h3 style="margin:0 0 6px">Zyro Survival</h3>
+          <p style="margin:0 0 8px;color:var(--muted)">A classic survival server with events and progress.</p>
+          <div style="font-weight:800">play.zyronetwork.net:19132</div>
+        </div>
+        <div class="server-item card">
+          <h3 style="margin:0 0 6px">Zyro Minigames</h3>
+          <p style="margin:0 0 8px;color:var(--muted)">Fast-paced minigames for quick fun.</p>
+          <div style="font-weight:800">minigames.zyronetwork.net:19133</div>
+        </div>
+        <div class="server-item card">
+          <h3 style="margin:0 0 6px">Creative</h3>
+          <p style="margin:0 0 8px;color:var(--muted)">Build freely with world-edit enabled.</p>
+          <div style="font-weight:800">creative.zyronetwork.net:19134</div>
+        </div>
       </div>
-      <div class="card">
-        <h4>Zyro Minigames</h4>
-        <p>IP: minigames.zyronetwork.net:19133</p>
-      </div>
-      <div class="card">
-        <h4>Creative</h4>
-        <p>IP: creative.zyronetwork.net:19134</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- STAFF -->
-  <section id="staff" class="section">
-    <h3>Staff & Community</h3>
-    <div class="grid">
-      <div class="card" style="text-align:center;">
-        <img src="staff1.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
-        <p><b>Aurora</b><br><span style="color:#94a3b8;">Head Admin</span></p>
+    <section id="staff" class="staff">
+      <h2 style="margin:0 0 12px">Staff & Community</h2>
+      <div class="staff-grid">
+        <div class="staff-card card">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="avatar" aria-hidden></div>
+            <div>
+              <div style="font-weight:800">Aurora</div>
+              <div style="color:var(--muted);font-size:13px">Head Admin</div>
+            </div>
+          </div>
+        </div>
+        <div class="staff-card card">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="avatar" aria-hidden></div>
+            <div>
+              <div style="font-weight:800">Kyro</div>
+              <div style="color:var(--muted);font-size:13px">Community Lead</div>
+            </div>
+          </div>
+        </div>
+        <div class="staff-card card">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="avatar" aria-hidden></div>
+            <div>
+              <div style="font-weight:800">Mika</div>
+              <div style="color:var(--muted);font-size:13px">Events Manager</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card" style="text-align:center;">
-        <img src="staff2.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
-        <p><b>Kyro</b><br><span style="color:#94a3b8;">Community Lead</span></p>
-      </div>
-      <div class="card" style="text-align:center;">
-        <img src="staff3.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
-        <p><b>Mika</b><br><span style="color:#94a3b8;">Events Manager</span></p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
-  <footer id="faq">
-    <div>
-      <h4>Contact</h4>
-      <p>Email: support@zyronetwork.net</p>
-      <a href="#">Discord</a>
-      <a href="#">Store</a>
-      <a href="#">Forum</a>
-    </div>
-    <p style="color:#64748b; font-size:12px; text-align:center; margin-top:20px;">
-      © 2025 ZyroNetwork — Built with love.
-    </p>
+    <section id="faq" style="max-width:1100px;margin:26px auto;padding:0 20px">
+      <h2 style="margin:0 0 12px">FAQ</h2>
+      <div class="card" style="padding:18px">
+        <details style="margin-bottom:8px"><summary style="cursor:pointer;font-weight:700">How do I join?</summary><p style="color:var(--muted);margin:8px 0 0">Use the IP <strong>play.zyronetwork.net:19132</strong> in your Minecraft client. Bedrock and Java IPs may differ.</p></details>
+        <details style="margin-bottom:8px"><summary style="cursor:pointer;font-weight:700">Is there a Discord?</summary><p style="color:var(--muted);margin:8px 0 0">Yes — join our Discord for announcements and support.</p></details>
+      </div>
+    </section>
+
+    <section id="join" style="max-width:1100px;margin:26px auto;padding:0 20px">
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <h3 style="margin:0">Ready to play?</h3>
+          <p style="margin:6px 0 0;color:var(--muted)">IP: <strong>play.zyronetwork.net:19132</strong></p>
+        </div>
+        <a class="cta" href="#" style="text-decoration:none">Connect</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© 2025 ZyroNetwork — Built with love.</div>
+    <div style="color:var(--muted)">Email: <a href="mailto:admin@zyronetwork.net" style="color:var(--muted);text-decoration:none">admin@zyronetwork.net</a></div>
   </footer>
-
 </body>
 </html>
