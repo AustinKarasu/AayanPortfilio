@@ -1,137 +1,193 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ZyroNetwork — Play. Build. Survive.</title>
-  <meta name="description" content="ZyroNetwork — Vanilla, Minigames & Survival Minecraft servers. IP: play.zyronetwork.net:19132">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZyroNetwork</title>
   <style>
-    :root{
-      --accent:#6ee7b7;
-      --bg:#0b1020;
-      --card:#0f1724;
-      --muted:#9aa4be;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f172a, #1e293b, #000);
+      color: #f1f5f9;
     }
-    *{
-      box-sizing:border-box;
-      cursor:url('https://cur.cursors-4u.net/games/gam-13/gam1276.cur'), auto;
+    header {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    body{
-      margin:0;
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      background:linear-gradient(180deg,#05060a 0%, #071026 100%);
-      color:#e6eef8;
-      -webkit-font-smoothing:antialiased;
-      overflow-x:hidden;
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    header{
-      display:flex;align-items:center;justify-content:space-between;padding:20px 28px;max-width:1100px;margin:0 auto;
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #cbd5e1;
     }
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:44px;height:44px;background:linear-gradient(135deg,#3b82f6,#06b6d4);display:grid;place-items:center;border-radius:10px;font-weight:700;color:#071026;transition:transform 0.2s}
-    .logo:hover{transform:rotate(10deg) scale(1.05)}
-    nav a{color:var(--muted);text-decoration:none;margin:0 10px;font-weight:600;transition:color 0.2s, transform 0.2s}
-    nav a:hover{color:var(--accent);transform:scale(1.05)}
-    .cta{background:var(--accent);color:#071026;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;transition:transform 0.2s, background 0.2s}
-    .cta:hover{transform:scale(1.08);background:#4ade80}
-
-    .hero{max-width:1100px;margin:28px auto;padding:44px;border-radius:14px;display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
-    .hero .left h1{font-size:42px;margin:0 0 10px}
-    .hero p{color:var(--muted);margin:0 0 18px}
-    .cta-row{display:flex;gap:12px}
-
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:12px;transition:transform 0.2s, box-shadow 0.2s}
-    .card:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 6px 20px rgba(0,0,0,0.4)}
-
-    .features{display:flex;gap:12px;margin-top:18px}
-    .feature{flex:1}
-    .servers{max-width:1100px;margin:26px auto;padding:0 20px}
-    .server-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .server-item{padding:14px;border-radius:10px;background:var(--card);border:1px solid rgba(255,255,255,0.03);transition:transform 0.2s, box-shadow 0.2s}
-    .server-item:hover{transform:scale(1.03);box-shadow:0 4px 14px rgba(0,0,0,0.4)}
-
-    .staff{max-width:1100px;margin:26px auto;padding:0 20px}
-    .staff-grid{display:flex;gap:14px;flex-wrap:wrap}
-    .staff-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:10px;min-width:180px;transition:transform 0.2s}
-    .staff-card:hover{transform:translateY(-3px) scale(1.02)}
-    .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#06b6d4,#3b82f6);display:inline-block}
-
-    footer{max-width:1100px;margin:40px auto 80px;padding:0 20px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
-
-    @media (max-width:880px){.hero{grid-template-columns:1fr;}.hero .left h1{font-size:32px}}
-
-    /* Cursor particle effect */
-    .cursor-dot{
-      position:fixed;
-      width:6px;
-      height:6px;
-      background:var(--accent);
-      border-radius:50%;
-      pointer-events:none;
-      transform:translate(-50%, -50%);
-      animation:fadeOut 0.6s forwards;
+    nav a:hover {
+      color: white;
     }
-    @keyframes fadeOut{
-      to{opacity:0;transform:translate(-50%, -50%) scale(0.5)}
+    .btn {
+      background: #10b981;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      align-items: center;
+    }
+    .hero img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .card {
+      background: rgba(30,41,59,0.4);
+      padding: 20px;
+      border-radius: 16px;
+    }
+    footer {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+      border-top: 1px solid #1e293b;
+    }
+    footer a {
+      background: rgba(71,85,105,0.6);
+      padding: 8px 16px;
+      border-radius: 8px;
+      margin-right: 8px;
+      color: #f1f5f9;
+      text-decoration: none;
+    }
+    footer a:hover {
+      background: rgba(71,85,105,0.8);
     }
   </style>
 </head>
 <body>
+
+  <!-- NAVBAR -->
   <header>
-    <div class="brand">
-      <div class="logo">Z</div>
-      <strong>ZyroNetwork</strong>
+    <div class="logo">
+      <img src="zyronetwork-logo.png" alt="ZyroNetwork Logo" style="height:50px;">
     </div>
     <nav>
-      <a href="#home">Home</a>
+      <a href="#features">Features</a>
       <a href="#servers">Servers</a>
       <a href="#staff">Staff</a>
-      <a class="cta" href="#join">Join Now</a>
+      <a href="#faq">FAQ</a>
+      <a href="#" class="btn">Join Now</a>
     </nav>
   </header>
+
+  <!-- HERO -->
   <section class="hero">
-    <div class="left">
-      <h1>Welcome to ZyroNetwork</h1>
-      <p>Play. Build. Survive. Join our Vanilla, Minigames & Survival Minecraft servers.</p>
-      <div class="cta-row">
-        <a class="cta" href="#join">IP: play.zyronetwork.net:19132</a>
+    <div>
+      <h2 style="font-size: 32px; font-weight: bold;">Play. Build. Survive. — Join ZyroNetwork</h2>
+      <p style="color:#cbd5e1;">A friendly, active Minecraft community with survival, creative, and minigame experiences.</p>
+      <p>IP: <b>play.zyronetwork.net:19132</b></p>
+      <a href="#servers" class="btn">Play Now</a>
+    </div>
+    <div>
+      <img src="hero.jpg" alt="Zyro hero">
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="section">
+    <h3>What we offer</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Vanilla Survival</h4>
+        <p>Balanced survival experience with custom events.</p>
+      </div>
+      <div class="card">
+        <h4>Minigames</h4>
+        <p>Fun minigames like parkour, spleef, and more.</p>
+      </div>
+      <div class="card">
+        <h4>Active Staff</h4>
+        <p>Friendly staff and fair gameplay.</p>
       </div>
     </div>
-    <div class="right">
-      <div class="card">Minecraft Image/Art here</div>
+  </section>
+
+  <!-- SERVERS -->
+  <section id="servers" class="section">
+    <h3>Servers</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Zyro Survival</h4>
+        <p>IP: play.zyronetwork.net:19132</p>
+      </div>
+      <div class="card">
+        <h4>Zyro Minigames</h4>
+        <p>IP: minigames.zyronetwork.net:19133</p>
+      </div>
+      <div class="card">
+        <h4>Creative</h4>
+        <p>IP: creative.zyronetwork.net:19134</p>
+      </div>
     </div>
   </section>
 
-  <section class="servers" id="servers">
-    <h2>Our Servers</h2>
-    <div class="server-grid">
-      <div class="server-item">Survival</div>
-      <div class="server-item">Minigames</div>
-      <div class="server-item">Creative</div>
+  <!-- STAFF -->
+  <section id="staff" class="section">
+    <h3>Staff & Community</h3>
+    <div class="grid">
+      <div class="card" style="text-align:center;">
+        <img src="staff1.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
+        <p><b>Aurora</b><br><span style="color:#94a3b8;">Head Admin</span></p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <img src="staff2.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
+        <p><b>Kyro</b><br><span style="color:#94a3b8;">Community Lead</span></p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <img src="staff3.jpg" alt="staff" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
+        <p><b>Mika</b><br><span style="color:#94a3b8;">Events Manager</span></p>
+      </div>
     </div>
   </section>
 
-  <section class="staff" id="staff">
-    <h2>Meet the Staff</h2>
-    <div class="staff-grid">
-      <div class="staff-card"><div class="avatar"></div> Admin</div>
-      <div class="staff-card"><div class="avatar"></div> Moderator</div>
+  <!-- FOOTER -->
+  <footer id="faq">
+    <div>
+      <h4>Contact</h4>
+      <p>Email: support@zyronetwork.net</p>
+      <a href="#">Discord</a>
+      <a href="#">Store</a>
+      <a href="#">Forum</a>
     </div>
-  </section>
-
-  <footer>
-    <span>© 2025 ZyroNetwork</span>
-    <span>Not affiliated with Mojang</span>
+    <p style="color:#64748b; font-size:12px; text-align:center; margin-top:20px;">
+      © 2025 ZyroNetwork — Built with love.
+    </p>
   </footer>
 
-  <script>
-    document.addEventListener('mousemove', e => {
-      const dot = document.createElement('div');
-      dot.className = 'cursor-dot';
-      dot.style.left = `${e.clientX}px`;
-      dot.style.top = `${e.clientY}px`;
-      document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 600);
-    });
-  </script>
 </body>
 </html>
+
