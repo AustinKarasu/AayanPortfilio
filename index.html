@@ -11,128 +11,84 @@
       color: white;
       background: #0d0d0d;
       overflow-x: hidden;
-    }
-    header {
       text-align: center;
-      padding: 40px 0 20px 0;
     }
-    header img {
-      max-width: 220px;
-    }
-    h1 {
-      margin-top: 10px;
-      font-size: 2.5em;
-    }
-    .server-info {
-      text-align: center;
-      margin: 40px 0;
-    }
-    .game-modes {
+
+    /* Hero Section like NetherGames */
+    .hero {
+      position: relative;
+      background: url('zyro-bg.jpg') center/cover no-repeat;
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 20px;
+      align-items: center;
+      text-shadow: 0px 2px 6px rgba(0,0,0,0.8);
     }
-    .mode-card {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      border-radius: 10px;
-      width: 250px;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(0, 255, 150, 0.5);
+    .hero img {
+      max-width: 200px;
     }
-    .mode-card h2 {
-      margin-bottom: 10px;
-      color: #00ff99;
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 10px;
     }
+    .changing-text {
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .launch-btn {
+      display: inline-block;
+      background: #ff9900;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .launch-btn:hover {
+      background: #e68a00;
+    }
+    .ip-info {
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
     footer {
       background: rgba(0,0,0,0.85);
       padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
       color: white;
-      flex-wrap: wrap;
-    }
-    .footer-info {
-      flex: 1;
-      min-width: 200px;
-    }
-    .footer-discord {
-      width: 350px;
-      height: 250px;
-      overflow-y: scroll;
-      background: #111;
-      border-radius: 8px;
-      padding: 5px;
-    }
-    /* Particle canvas style */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
     }
   </style>
 </head>
 <body>
 
-<!-- Particle Background -->
-<div id="particles-js"></div>
-
-<header>
+<!-- Hero Section -->
+<div class="hero">
   <img src="zyro.png" alt="ZyroNetwork Logo">
-  <h1>Welcome to ZyroNetwork</h1>
-</header>
-
-<section class="server-info">
-  <h2>IP: play.zyronetwork.net</h2>
-  <h3>Port: 19132</h3>
-</section>
-
-<section class="game-modes">
-  <div class="mode-card">
-    <h2>Skyblock</h2>
-    <p>Build your island, gather resources, and rise to the top.</p>
-  </div>
-  <div class="mode-card">
-    <h2>GStuff PvP Only</h2>
-    <p>Fast-paced PvP battles with the best gear.</p>
-  </div>
-</section>
+  <p>All for one. All for fun. Play</p>
+  <div class="changing-text" id="gameMode">Skyblock</div>
+  <a href="minecraft://?addExternalServer=ZyroNetwork|play.zyronetwork.net:19132" class="launch-btn">Launch Minecraft →</a>
+  <div class="ip-info">And connect to <strong>play.zyronetwork.net</strong> (19132)</div>
+</div>
 
 <footer>
-  <div class="footer-info">
-    <h3>ZyroNetwork</h3>
-    <p>IP: <strong>play.zyronetwork.net</strong> (Port: 19132)</p>
-    <p>Skyblock | GStuff PvP Only</p>
-    <p><a href="https://discord.zyronetwork.net/" target="_blank" style="color:#00ff99;">Join our Discord</a></p>
-    <p>&copy; 2025 ZyroNetwork. All rights reserved.</p>
-  </div>
-  <div class="footer-discord">
-    <iframe src="https://discord.com/widget?id=1365466995700531200&theme=dark"
-      width="100%" height="500" allowtransparency="true" frameborder="0"
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-    </iframe>
-  </div>
+  <p>&copy; 2025 ZyroNetwork — Skyblock | GStuff PvP Only</p>
 </footer>
 
-<!-- Particle.js Library -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<!-- Changing Text Script -->
 <script>
-particlesJS("particles-js", {
-  "particles": {
-    "number": { "value": 80 },
-    "size": { "value": 3 },
-    "move": { "speed": 1 },
-    "line_linked": { "enable": true },
-    "color": { "value": "#00ff99" }
-  }
-});
+  const gameModes = ["Skyblock", "GStuff PvP Only"];
+  let index = 0;
+  const textElement = document.getElementById("gameMode");
+
+  setInterval(() => {
+    index = (index + 1) % gameModes.length;
+    textElement.textContent = gameModes[index];
+  }, 2500);
 </script>
 
 </body>
 </html>
+
