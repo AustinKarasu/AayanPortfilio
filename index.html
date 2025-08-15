@@ -483,7 +483,7 @@
       <a href="https://discord.zyronetwork.net/" tabindex="0">Vote</a>
       <a href="https://zyronetwork.tebex.io/" tabindex="0">Store</a>
     </div>
-    <button id="musicToggle" aria-pressed="false" aria-label="Toggle Background Music" tabindex="0">Login</button>
+    <button id="musicToggle" aria-pressed="false" aria-label="Toggle Background Music" tabindex="0">🎵 Music</button>
   </nav>
 
   <!-- Hero Section -->
@@ -571,11 +571,11 @@
     musicToggle.addEventListener('click', () => {
       if (bgMusic.paused) {
         bgMusic.play();
-        musicToggle.textContent = 'You';
+        musicToggle.textContent = '🟢 ON';
         musicToggle.setAttribute('aria-pressed', 'false');
       } else {
         bgMusic.pause();
-        musicToggle.textContent = 'You';
+        musicToggle.textContent = '🔴 OFF';
         musicToggle.setAttribute('aria-pressed', 'true');
       }
     });
