@@ -10,7 +10,6 @@
       --card:#1a1a1a;
       --accent:#e11d48; /* professional red */
       --muted:#9ca3af;
-      --glass: rgba(255,255,255,0.05);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{margin:0;font-family:"Poppins",ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:var(--bg);color:#f5f5f5;min-height:100vh;overflow-x:hidden}
@@ -28,17 +27,11 @@
     .meta{font-size:14px;color:var(--muted);margin-bottom:16px}
     .actions{display:flex;gap:12px;flex-wrap:wrap}
     .btn{padding:10px 18px;border-radius:8px;border:0;font-weight:600;cursor:pointer;font-size:14px;transition:background .2s ease,transform .2s ease;text-decoration:none;text-align:center}
-    .btn.preview{background:transparent;color:var(--accent);border:1px solid var(--accent)}
-    .btn.preview:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
     .btn.download{background:var(--accent);color:#fff}
     .btn.download:hover{background:#b91c3a;transform:translateY(-2px)}
 
-    .viewer{margin-top:20px;display:none}
-    .viewer iframe{width:100%;height:70vh;border:0;border-radius:12px}
-
     footer{padding:24px;text-align:center;font-size:14px;color:var(--muted);margin-top:40px}
 
-    /* responsive */
     @media (max-width:640px){
       h1{font-size:26px}
       .card{padding:18px}
@@ -54,99 +47,40 @@
   </header>
 
   <main>
-    <article class="card">
-      <h3>OS-Assignment-1</h3>
-      <div class="meta">Prepared by: Aayan Parmar — Roll No: 02</div>
-      <div class="actions">
-        <button class="btn preview" onclick="openViewer()">Preview</button>
-        <a class="btn download" href="OS_Assignment1.pdf" download="OS_Assignment1.pdf">Download</a>
-      </div>
-      <div class="viewer" id="viewer">
-        <iframe src="OS_Assignment1.pdf"></iframe>
-      </div>
-    </article>
+    <div class="grid">
+      <article class="card">
+        <h3>OS-Assignment-1</h3>
+        <div class="meta">Prepared by: Aayan Parmar — Roll No: 02</div>
+        <div class="actions">
+          <a class="btn download" href="./OS_Assignment1.pdf" download="OS_Assignment1.pdf">Download</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>CPUC-Assignment-1</h3>
+        <div class="meta">Prepared by: Aayan Parmar</div>
+        <div class="actions">
+          <a class="btn download" href="./CPUC-Assignment-1.pdf" download="CPUC-Assignment-1.pdf">Download</a>
+        </div>
+      </article>
+    </div>
   </main>
 
   <footer>
-    Meow  | Creator: Aayan Parmar
+     ZyroNetwork | Creator & Founder: Aayan Parmar
   </footer>
 
   <script>
-    // particle background
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
+    // particle background (kept simple & performant)
+    const canvasBG = document.getElementById('particles');
+    const ctxBG = canvasBG.getContext('2d');
     let particles = [];
     let w,h;
-
-    function resize(){
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle{
-      constructor(){
-        this.x = Math.random()*w;
-        this.y = Math.random()*h;
-        this.vx = (Math.random()-0.5)*0.6;
-        this.vy = (Math.random()-0.5)*0.6;
-        this.size = Math.random()*2+1;
-      }
-      draw(){
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fillStyle = 'rgba(225,29,72,0.8)';
-        ctx.fill();
-      }
-      update(){
-        this.x += this.vx;
-        this.y += this.vy;
-        if(this.x<0||this.x>w) this.vx*=-1;
-        if(this.y<0||this.y>h) this.vy*=-1;
-        this.draw();
-      }
-    }
-
-    function init(){
-      particles = [];
-      for(let i=0;i<120;i++){
-        particles.push(new Particle());
-      }
-    }
-    init();
-
-    function animate(){
-      ctx.clearRect(0,0,w,h);
-      for(let i=0;i<particles.length;i++){
-        particles[i].update();
-        for(let j=i;j<particles.length;j++){
-          let dx = particles[i].x - particles[j].x;
-          let dy = particles[i].y - particles[j].y;
-          let dist = Math.sqrt(dx*dx+dy*dy);
-          if(dist<100){
-            ctx.beginPath();
-            ctx.strokeStyle = 'rgba(225,29,72,'+(1-dist/100)+')';
-            ctx.lineWidth = 0.6;
-            ctx.moveTo(particles[i].x,particles[i].y);
-            ctx.lineTo(particles[j].x,particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    // viewer logic
-    function openViewer(){
-      const viewer = document.getElementById('viewer');
-      if(viewer.style.display==='none' || viewer.style.display===''){
-        viewer.style.display='block';
-      } else {
-        viewer.style.display='none';
-      }
-    }
+    function resize(){ w = canvasBG.width = window.innerWidth; h = canvasBG.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    class Particle{ constructor(){ this.x=Math.random()*w; this.y=Math.random()*h; this.vx=(Math.random()-0.5)*0.6; this.vy=(Math.random()-0.5)*0.6; this.size=Math.random()*2+1 } draw(){ ctxBG.beginPath(); ctxBG.arc(this.x,this.y,this.size,0,Math.PI*2); ctxBG.fillStyle='rgba(225,29,72,0.8)'; ctxBG.fill() } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>w) this.vx*=-1; if(this.y<0||this.y>h) this.vy*=-1; this.draw() }}
+    function init(){ particles=[]; for(let i=0;i<120;i++) particles.push(new Particle()); }
+    init(); function animate(){ ctxBG.clearRect(0,0,w,h); for(let i=0;i<particles.length;i++){ particles[i].update(); for(let j=i;j<particles.length;j++){ let dx=particles[i].x-particles[j].x; let dy=particles[i].y-particles[j].y; let dist=Math.sqrt(dx*dx+dy*dy); if(dist<100){ ctxBG.beginPath(); ctxBG.strokeStyle='rgba(225,29,72,'+(1-dist/100)+')'; ctxBG.lineWidth=0.6; ctxBG.moveTo(particles[i].x,particles[i].y); ctxBG.lineTo(particles[j].x,particles[j].y); ctxBG.stroke(); } } } requestAnimationFrame(animate); } animate();
   </script>
 </body>
 </html>
