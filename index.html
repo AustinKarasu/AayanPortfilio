@@ -4,84 +4,177 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ZyroNetwork — Computer Engg: Assignments [3rd Sem]</title>
+  <meta name="description" content="ZyroNetwork — Portal for 3rd Sem Computer Engg assignments. Subject dashboard, downloads, deadlines, and resources." />
   <style>
     :root{
-      --bg:#0d0d0d;
-      --card:#1a1a1a;
-      --accent:#e11d48; /* professional red */
-      --muted:#9ca3af;
+      --bg:#0b0b0c; --card:#111214; --accent:#e11d48; --accent-2:#ff6b5f; --muted:#9aa4ad;
+      --glass: rgba(255,255,255,0.03); --radius:12px;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{margin:0;font-family:"Poppins",ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:var(--bg);color:#f5f5f5;min-height:100vh;overflow-x:hidden}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#07070a,#0e0b0b);color:#eef2f4;min-height:100vh}
 
-    canvas#particles{position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#111111,#1a1a1a)}
+    /* container */
+    .stage{padding:28px;max-width:1200px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:68px;height:68px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,0,0,0.25);background:#fff}
+    .logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+    h1{margin:0;font-size:20px}
+    .subtitle{color:var(--muted);font-size:13px}
 
-    header{padding:40px 20px;text-align:center}
-    h1{font-size:36px;font-weight:700;color:var(--accent);margin-bottom:6px}
-    h2{font-size:16px;font-weight:500;color:var(--muted)}
+    .topbar{display:flex;gap:12px;align-items:center}
+    .announce{background:rgba(225,29,72,0.08);color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700}
 
-    main{padding:30px 20px;display:grid;gap:24px;max-width:1100px;margin:0 auto}
-    .card{background:var(--card);padding:24px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.06);transition:transform .25s ease, box-shadow .25s ease}
-    .card:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(0,0,0,0.7)}
-    .card h3{font-size:20px;font-weight:600;margin-bottom:10px;color:#fff}
-    .meta{font-size:14px;color:var(--muted);margin-bottom:16px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{padding:10px 18px;border-radius:8px;border:0;font-weight:600;cursor:pointer;font-size:14px;transition:background .2s ease,transform .2s ease;text-decoration:none;text-align:center}
-    .btn.download{background:var(--accent);color:#fff}
-    .btn.download:hover{background:#b91c3a;transform:translateY(-2px)}
+    /* layout */
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:22px}
 
-    footer{padding:24px;text-align:center;font-size:14px;color:var(--muted);margin-top:40px}
+    /* left - dashboard */
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
 
-    @media (max-width:640px){
-      h1{font-size:26px}
-      .card{padding:18px}
-    }
+    .tabs{display:flex;gap:8px;margin-bottom:14px}
+    .tab{padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;background:transparent;border:1px solid rgba(255,255,255,0.02)}
+    .tab.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061014;border:0}
+
+    .controls{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+    .search{flex:1;display:flex;gap:8px}
+    .search input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+    .filter select{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+
+    .assign-list{display:grid;gap:12px}
+    .assign{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.02)}
+    .assign .left{display:flex;gap:12px;align-items:center}
+    .badge{width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent)}
+    .meta{font-size:14px}
+    .sub{color:var(--muted);font-size:12px}
+    .actions{display:flex;gap:8px;align-items:center}
+    .btn{padding:8px 12px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
+    .btn.download{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061014}
+    .deadline{font-size:12px;color:var(--muted)}
+
+    /* right - sidebar */
+    .sidebar .card{position:sticky;top:24px}
+    .small{font-size:13px;color:var(--muted)}
+
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+    @media (max-width:900px){.grid{grid-template-columns:1fr}.brand h1{font-size:18px}}
   </style>
 </head>
 <body>
-  <canvas id="particles"></canvas>
+  <div class="stage">
+    <header>
+      <div class="brand">
+        <div class="logo"><img src="https://i.postimg.cc/wB6vtrDh/zyro.jpg" alt="ZyroNetwork logo"/></div>
+        <div>
+          <h1>ZyroNetwork</h1>
+          <div class="subtitle">Computer Engg: Assignments — 3rd Semester</div>
+        </div>
+      </div>
+      <div class="topbar">
+        <div class="announce" id="announce">New: OS_assignment_1</div>
+      </div>
+    </header>
 
-  <header>
-    <h1>ZyroNetwork</h1>
-    <h2>Computer Engg: Assignments [3rd Sem]</h2>
-  </header>
-
-  <main>
     <div class="grid">
-      <article class="card">
-        <h3>OS-Assignment-1</h3>
-        <div class="meta">Prepared by: Aayan Parmar — Roll No: 02</div>
-        <div class="actions">
-          <a class="btn download" href="./OS_Assignment1.pdf" download="OS_Assignment1.pdf">Download</a>
-        </div>
-      </article>
+      <section>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <strong style="font-size:16px">Assignments Dashboard</strong>
+            <div class="small">Creator: Aayan Parmar</div>
+          </div>
 
-      <article class="card">
-        <h3>CPUC-Assignment-1</h3>
-        <div class="meta">Prepared by: Aayan Parmar — Roll No: 02</div>
-        <div class="actions">
-          <a class="btn download" href="./CPUC-Assignment-1.pdf" download="CPUC-Assignment-1.pdf">Download</a>
+          <div class="tabs" role="tablist">
+            <div class="tab active" data-subject="All" onclick="switchTab(event)">All</div>
+            <div class="tab" data-subject="OS" onclick="switchTab(event)">OS</div>
+            <div class="tab" data-subject="CPUC" onclick="switchTab(event)">CPUC</div>
+          </div>
+
+          <div class="controls">
+            <div class="search"><input id="search" placeholder="Search assignments..." oninput="renderList()"/></div>
+            <div class="filter"><select id="sort" onchange="renderList()"><option value="recent">Sort: Recent</option><option value="deadline">Sort: Deadline</option></select></div>
+          </div>
+
+          <div class="assign-list" id="assignList">
+            <!-- JS will render assignments here -->
+          </div>
         </div>
-      </article>
+
+        <div style="height:18px"></div>
+
+        <div class="card">
+          <strong style="font-size:15px">Announcements</strong>
+          <div class="small" style="margin-top:8px">CPUC-Assignment-2 on the way</div>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <div class="card">
+          <strong>Community & Contact</strong>
+          <div class="small" style="margin-top:8px">Community: <a href="https://discord.zyronetwork.net/" style="color:var(--accent)" target="_blank" rel="noopener">https://discord.zyronetwork.net/</a></div>
+          <div class="small" style="margin-top:6px">Discord: <strong>arise_pawns</strong></div>
+
+          <hr style="margin:16px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)" />
+
+          <strong>About</strong>
+          <div class="small" style="margin-top:8px">Name: <strong>Aayan Parmar</strong></div>
+          <div class="small">Roll No: <strong>02</strong></div>
+          <div class="small" style="margin-top:6px">Tags: Gymnast, Coder, Gamer, Lazy</div>
+        </div>
+      </aside>
     </div>
-  </main>
 
-  <footer>
-     ZyroNetwork | Creator & Founder: Aayan Parmar
-  </footer>
+    <footer>© ZyroNetwork — Made for Computer Engg</footer>
+  </div>
+
+  <canvas id="particles" style="position:fixed;inset:0;z-index:-1"></canvas>
 
   <script>
-    // particle background (kept simple & performant)
-    const canvasBG = document.getElementById('particles');
-    const ctxBG = canvasBG.getContext('2d');
-    let particles = [];
-    let w,h;
-    function resize(){ w = canvasBG.width = window.innerWidth; h = canvasBG.height = window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
-    class Particle{ constructor(){ this.x=Math.random()*w; this.y=Math.random()*h; this.vx=(Math.random()-0.5)*0.6; this.vy=(Math.random()-0.5)*0.6; this.size=Math.random()*2+1 } draw(){ ctxBG.beginPath(); ctxBG.arc(this.x,this.y,this.size,0,Math.PI*2); ctxBG.fillStyle='rgba(225,29,72,0.8)'; ctxBG.fill() } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>w) this.vx*=-1; if(this.y<0||this.y>h) this.vy*=-1; this.draw() }}
-    function init(){ particles=[]; for(let i=0;i<120;i++) particles.push(new Particle()); }
-    init(); function animate(){ ctxBG.clearRect(0,0,w,h); for(let i=0;i<particles.length;i++){ particles[i].update(); for(let j=i;j<particles.length;j++){ let dx=particles[i].x-particles[j].x; let dy=particles[i].y-particles[j].y; let dist=Math.sqrt(dx*dx+dy*dy); if(dist<100){ ctxBG.beginPath(); ctxBG.strokeStyle='rgba(225,29,72,'+(1-dist/100)+')'; ctxBG.lineWidth=0.6; ctxBG.moveTo(particles[i].x,particles[i].y); ctxBG.lineTo(particles[j].x,particles[j].y); ctxBG.stroke(); } } } requestAnimationFrame(animate); } animate();
+    // particle background
+    const c = document.getElementById('particles'); const cx = c.getContext('2d');
+    function resizeCanvas(){ c.width = innerWidth; c.height = innerHeight; }
+    window.addEventListener('resize', resizeCanvas); resizeCanvas();
+    const particles = [];
+    for(let i=0;i<80;i++){ particles.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,r:Math.random()*2+0.8,alpha:Math.random()*0.5+0.1}); }
+    function draw(){ cx.clearRect(0,0,c.width,c.height); for(let i=0;i<particles.length;i++){ const p=particles[i]; p.x+=p.vx; p.y+=p.vy; if(p.x<0)p.x=c.width; if(p.x>c.width)p.x=0; if(p.y<0)p.y=c.height; if(p.y>c.height)p.y=0; cx.beginPath(); cx.fillStyle=`rgba(225,29,72,${p.alpha})`; cx.arc(p.x,p.y,p.r,0,Math.PI*2); cx.fill(); } requestAnimationFrame(draw); } draw();
+
+    // Assignment data
+    const assignments = [
+      {id:'os-1', title:'OS-Assignment-1', subject:'OS', due:'2025-09-20', by:'Aayan Parmar', file:'./OS_Assignment1.pdf'},
+      {id:'cpuc-1', title:'CPUC-Assignment-1', subject:'CPUC', due:'2025-09-25', by:'Aayan Parmar', file:'./CPUC-Assignment-1.pdf'}
+    ];
+
+    // Initialize download counters in localStorage
+    function initCounters(){ assignments.forEach(a=>{ const k='dl:'+a.id; if(localStorage.getItem(k)===null) localStorage.setItem(k,'0'); }); }
+    initCounters();
+
+    // Render list
+    let activeSubject = 'All';
+    function switchTab(e){ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); e.currentTarget.classList.add('active'); activeSubject = e.currentTarget.dataset.subject; renderList(); }
+
+    function renderList(){ const list = document.getElementById('assignList'); list.innerHTML=''; const q = document.getElementById('search').value.trim().toLowerCase(); const sort = document.getElementById('sort').value;
+      let items = assignments.filter(a=> (activeSubject==='All' || a.subject===activeSubject) && (a.title.toLowerCase().includes(q) || a.subject.toLowerCase().includes(q)) );
+      if(sort==='deadline'){ items.sort((x,y)=> new Date(x.due) - new Date(y.due)); } else { items.sort((x,y)=> new Date(y.due) - new Date(x.due)); }
+      items.forEach(a=>{ const div=document.createElement('div'); div.className='assign'; div.innerHTML = `
+        <div class="left">
+          <div class="badge">${a.subject[0]}</div>
+          <div>
+            <div class="meta">${a.title}</div>
+            <div class="sub">By ${a.by} • Due: <span class="deadline">${a.due}</span></div>
+          </div>
+        </div>
+        <div class="actions">
+          ${a.file?`<a class="btn download" href="${a.file}" download onclick="increment('${a.id}')">Download</a>`:`<button class="btn" disabled>Not available</button>`}
+          <div class="small" style="color:var(--muted);margin-left:8px">Downloads: <span id="cnt-${a.id}">${localStorage.getItem('dl:'+a.id) || 0}</span></div>
+        </div>
+      `; list.appendChild(div); }); }
+
+    function increment(id){ const k='dl:'+id; let v = parseInt(localStorage.getItem(k)||'0'); v++; localStorage.setItem(k,String(v)); const el = document.getElementById('cnt-'+id); if(el) el.textContent = v; }
+
+    // initial render
+    renderList();
+
+    // expose for testing/debug
+    window.__zyro = {assignments, renderList, increment};
   </script>
 </body>
 </html>
-
