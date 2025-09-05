@@ -7,9 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0b0c; --card:#111214; --accent:#e11d48; --accent-2:#ff6b5f; --muted:#9aa4ad;
+      --accent:#e11d48; --accent-2:#ff6b5f; --muted:#9aa4ad;
     }
-    body{margin:0;font-family:Inter,system-ui;background:linear-gradient(180deg,#07070a,#0e0b0b);color:#eef2f4}
+    body{
+      margin:0;font-family:Inter,system-ui;
+      background:linear-gradient(180deg,#07070a,#0e0b0b);
+      color:#eef2f4;min-height:100vh;
+    }
     .stage{padding:28px;max-width:1200px;margin:0 auto}
     header{display:flex;justify-content:space-between;align-items:center}
     .brand{display:flex;gap:14px;align-items:center}
@@ -18,7 +22,7 @@
     h1{margin:0;font-size:20px}
     .subtitle{color:var(--muted);font-size:13px}
     .tabs{display:flex;gap:8px;margin:14px 0}
-    .tab{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;border:1px solid rgba(255,255,255,0.05)}
+    .tab{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;border:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02)}
     .tab img{width:18px;height:18px}
     .tab.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061014}
     .assign-list{display:grid;gap:12px}
@@ -27,9 +31,11 @@
     .sidebar .card{padding:18px;background:rgba(255,255,255,0.02);border-radius:14px}
     .avatar{width:72px;height:72px;border-radius:12px;overflow:hidden}
     .avatar img{width:100%;height:100%;object-fit:cover}
+    footer{text-align:center;color:var(--muted);margin:20px 0;font-size:13px}
   </style>
 </head>
 <body>
+  <canvas id="particles" style="position:fixed;inset:0;z-index:-1"></canvas>
   <div class="stage">
     <header>
       <div class="brand">
@@ -83,12 +89,50 @@
         </div>
       </aside>
     </div>
+
+    <footer>© ZyroNetwork — Made for Computer Engg</footer>
   </div>
 
   <script>
-    const assignments = [
-      {id:'os-1', title:'OS-Assignment-1', subject:'OS', file:'./OS_Assignment1.pdf'},
-      {id:'cpuc-1', title:'CPUC-Assignment-1', subject:'CPUC', file:'./CPUC-Assignment-1.pdf'}
+    // Typing effect
+    const typingEl=document.getElementById('typing');
+    const phrases=['Computer Engg: Assignments — 3rd Sem','Clean, Fast, Professional','Join the ZyroNetwork Discord'];
+    let pIdx=0,ch=0,forward=true;
+    function tick(){
+      const text=phrases[pIdx];
+      if(forward){ch++;if(ch>text.length){forward=false;setTimeout(tick,1200);return;}}
+      else{ch--;if(ch<0){forward=true;pIdx=(pIdx+1)%phrases.length;setTimeout(tick,300);return;}}
+      typingEl.textContent=text.slice(0,ch);
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    // Particle background
+    const c=document.getElementById('particles'),cx=c.getContext('2d');
+    function resizeCanvas(){c.width=innerWidth;c.height=innerHeight;}
+    window.addEventListener('resize',resizeCanvas);resizeCanvas();
+    const particles=[];
+    for(let i=0;i<80;i++){particles.push({x:Math.random()*c.width,y:Math.random()*c.height,
+      vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
+      r:Math.random()*2+0.8,alpha:Math.random()*0.5+0.1});}
+    function draw(){
+      cx.clearRect(0,0,c.width,c.height);
+      for(const p of particles){
+        p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;
+        if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;
+        cx.beginPath();
+        cx.fillStyle=`rgba(225,29,72,${p.alpha})`;
+        cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Assignments
+    const assignments=[
+      {id:'os-1',title:'OS-Assignment-1',subject:'OS',file:'./OS_Assignment1.pdf'},
+      {id:'cpuc-1',title:'CPUC-Assignment-1',subject:'CPUC',file:'./CPUC-Assignment-1.pdf'}
     ];
     let activeSubject='All';
     function switchTab(e){
@@ -98,12 +142,10 @@
       renderList();
     }
     function renderList(){
-      const list=document.getElementById('assignList');
-      list.innerHTML='';
+      const list=document.getElementById('assignList');list.innerHTML='';
       assignments.filter(a=>activeSubject==='All'||a.subject===activeSubject)
         .forEach(a=>{
-          const div=document.createElement('div');
-          div.className='assign';
+          const div=document.createElement('div');div.className='assign';
           div.innerHTML=`<div class="left"><div class="badge">${a.subject[0]}</div>
             <div><b>${a.title}</b><div style="font-size:12px;color:#aaa">${a.subject}</div></div></div>
             <a class="btn download" href="${a.file}" download>Download</a>`;
@@ -114,4 +156,3 @@
   </script>
 </body>
 </html>
-
