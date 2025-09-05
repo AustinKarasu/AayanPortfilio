@@ -7,31 +7,62 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --accent:#e11d48; --accent-2:#ff6b5f; --muted:#9aa4ad;
+      --accent:#e11d48; --accent-2:#ff6b5f; --muted:#9aa4ad; --card:#0f1112;
     }
-    body{
-      margin:0;font-family:Inter,system-ui;
-      background:linear-gradient(180deg,#07070a,#0e0b0b);
-      color:#eef2f4;min-height:100vh;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui;background:linear-gradient(180deg,#07070a,#0e0b0b);color:#eef2f4;min-height:100vh}
+
     .stage{padding:28px;max-width:1200px;margin:0 auto}
     header{display:flex;justify-content:space-between;align-items:center}
     .brand{display:flex;gap:14px;align-items:center}
-    .logo{width:68px;height:68px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+    .logo{width:68px;height:68px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 12px 40px rgba(225,29,72,0.12);border:1px solid rgba(255,255,255,0.03)}
     .logo img{max-width:85%;max-height:85%;object-fit:contain}
     h1{margin:0;font-size:20px}
     .subtitle{color:var(--muted);font-size:13px}
+
+    .announce{background:rgba(225,29,72,0.06);color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700}
+
+    .grid{display:grid;grid-template-columns:1fr 340px;gap:20px;margin-top:20px}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+
     .tabs{display:flex;gap:8px;margin:14px 0}
-    .tab{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;border:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02)}
-    .tab img{width:18px;height:18px}
-    .tab.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061014}
-    .assign-list{display:grid;gap:12px}
-    .assign{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
-    .badge{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.05)}
-    .sidebar .card{padding:18px;background:rgba(255,255,255,0.02);border-radius:14px}
-    .avatar{width:72px;height:72px;border-radius:12px;overflow:hidden}
+    .tab{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;border:1px solid rgba(255,255,255,0.04);background:transparent;transition:all .18s}
+    .tab img{width:18px;height:18px;border-radius:4px}
+    .tab.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061014;transform:translateY(-4px);box-shadow:0 14px 30px rgba(225,29,72,0.12)}
+
+    .controls{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+    .search{flex:1}
+    .search input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+    .filter select{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+
+    .assign-list{display:grid;gap:14px}
+    .assign{display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03);transition:transform .22s ease,box-shadow .22s ease}
+    .assign:hover{transform:translateY(-8px);box-shadow:0 28px 60px rgba(0,0,0,0.6)}
+    .assign.completed{opacity:0.6;filter:grayscale(.05)}
+
+    .left{display:flex;gap:14px;align-items:center}
+    .badge-img{width:56px;height:56px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .badge-img img{width:100%;height:100%;object-fit:cover}
+    .meta{font-size:15px;font-weight:700}
+    .sub{color:var(--muted);font-size:13px}
+
+    .actions{display:flex;gap:10px;align-items:center}
+    .btn{padding:8px 12px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .btn.download{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061014}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    .count{font-size:13px;color:var(--muted)}
+
+    .sidebar .card{position:sticky;top:24px}
+    .profile{display:flex;gap:12px;align-items:center;margin-top:12px}
+    .avatar{width:72px;height:72px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
     .avatar img{width:100%;height:100%;object-fit:cover}
-    footer{text-align:center;color:var(--muted);margin:20px 0;font-size:13px}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    .tag{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted)}
+
+    footer{text-align:center;color:var(--muted);margin:18px 0;font-size:13px}
+
+    @media (max-width:920px){.grid{grid-template-columns:1fr}.tab img{display:none}}
   </style>
 </head>
 <body>
@@ -39,120 +70,134 @@
   <div class="stage">
     <header>
       <div class="brand">
-        <div class="logo"><img src="https://i.postimg.cc/wB6vtrDh/zyro.jpg" alt="logo"></div>
+        <div class="logo"><img src="https://i.postimg.cc/wB6vtrDh/zyro.jpg" alt="logo"/></div>
         <div>
           <h1>ZyroNetwork</h1>
-          <div class="subtitle"><span id="typing"></span></div>
+          <div class="subtitle" id="typing">Computer Engg: Assignments — 3rd Sem</div>
         </div>
       </div>
       <div class="announce">New: CPUC assignment added</div>
     </header>
 
-    <div style="display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:20px">
+    <div class="grid">
       <section>
-        <div class="tabs">
-          <div class="tab active" data-subject="All" onclick="switchTab(event)">All</div>
-          <div class="tab" data-subject="OS" onclick="switchTab(event)">
-            <img src="https://i.postimg.cc/wxXsBnyj/os.webp" alt="OS icon">OS
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <strong style="font-size:16px">Assignments Dashboard</strong>
+            <div class="small">Creator: Aayan Parmar</div>
           </div>
-          <div class="tab" data-subject="CPUC" onclick="switchTab(event)">
-            <img src="https://i.postimg.cc/rsMsWF0F/cpuc.png" alt="CPUC icon">CPUC
+
+          <div class="tabs" role="tablist">
+            <div class="tab active" data-subject="All" onclick="switchTab(event)">All</div>
+            <div class="tab" data-subject="OS" onclick="switchTab(event)"><img src="https://i.postimg.cc/wxXsBnyj/os.webp" alt="OS">OS</div>
+            <div class="tab" data-subject="CPUC" onclick="switchTab(event)"><img src="https://i.postimg.cc/rsMsWF0F/cpuc.png" alt="CPUC">CPUC</div>
           </div>
+
+          <div class="controls">
+            <div class="search"><input id="search" placeholder="Search assignments..." oninput="renderList()"/></div>
+            <div class="filter"><select id="status" onchange="renderList()"><option value="all">Status: All</option><option value="pending">Pending</option><option value="completed">Completed</option></select></div>
+          </div>
+
+          <div class="assign-list" id="assignList"></div>
         </div>
-        <div class="assign-list" id="assignList"></div>
+
+        <div style="height:18px"></div>
+
+        <div class="card">
+          <strong style="font-size:15px">Announcements</strong>
+          <div class="small" style="margin-top:8px">No unread announcements. You can add important messages here.</div>
+        </div>
       </section>
 
       <aside class="sidebar">
         <div class="card">
           <strong>Community & Contact</strong>
-          <p>Community: <a href="https://discord.zyronetwork.net/" target="_blank">discord.zyronetwork.net</a></p>
-          <p>Discord: <b>arise_pawns</b></p>
-          <hr>
+          <div class="small" style="margin-top:8px">Community: <a href="https://discord.zyronetwork.net/" style="color:var(--accent)" target="_blank" rel="noopener">https://discord.zyronetwork.net/</a></div>
+          <div class="small" style="margin-top:6px">Discord: <strong>arise_pawns</strong></div>
+
+          <hr style="margin:16px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)" />
+
           <strong>About</strong>
-          <div class="profile" style="display:flex;gap:12px;align-items:center;margin-top:8px">
-            <div class="avatar"><img src="https://i.postimg.cc/nr3FDKf0/karasu.jpg" alt="Profile"></div>
-            <div>
-              <b>Aayan Parmar</b><br>
-              Roll No: 02<br>
-              Gymnast • Coder • Gamer • Lazy
+          <div class="profile">
+            <div class="avatar"><img src="https://i.postimg.cc/nr3FDKf0/karasu.jpg" alt="Profile"/></div>
+            <div class="info">
+              <strong>Aayan Parmar</strong>
+              <div class="small">Roll No: 02</div>
+              <div class="tags">
+                <div class="tag">Gymnast</div>
+                <div class="tag">Coder</div>
+                <div class="tag">Gamer</div>
+                <div class="tag">Lazy</div>
+              </div>
             </div>
           </div>
-          <hr>
+
+          <hr style="margin:16px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)" />
+
           <strong>Quick Links</strong>
-          <ul>
-            <li><a href="./OS_Assignment1.pdf" download>OS Assignment 1</a></li>
-            <li><a href="./CPUC-Assignment-1.pdf" download>CPUC Assignment 1</a></li>
-          </ul>
-          <hr>
+          <div class="linklist" style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+            <a href="./OS_Assignment1.pdf" download style="color:var(--accent)">OS Assignment 1</a>
+            <a href="./CPUC-Assignment-1.pdf" download style="color:var(--accent)">CPUC Assignment 1</a>
+          </div>
+
+          <hr style="margin:16px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)" />
+
           <strong>Recent Activity</strong>
-          <div id="activity" style="font-size:13px;color:#aaa"></div>
+          <div id="activity" class="small" style="margin-top:8px;line-height:1.6;max-height:220px;overflow:auto"></div>
         </div>
       </aside>
     </div>
 
-    <footer>© ZyroNetwork — Made for Computer Engg</footer>
+    <footer>© ZyroNetwork — Creator: Aayan Parmar</footer>
   </div>
 
   <script>
-    // Typing effect
-    const typingEl=document.getElementById('typing');
-    const phrases=['Computer Engg: Assignments — 3rd Sem','Clean, Fast, Professional','Join the ZyroNetwork Discord'];
-    let pIdx=0,ch=0,forward=true;
-    function tick(){
-      const text=phrases[pIdx];
-      if(forward){ch++;if(ch>text.length){forward=false;setTimeout(tick,1200);return;}}
-      else{ch--;if(ch<0){forward=true;pIdx=(pIdx+1)%phrases.length;setTimeout(tick,300);return;}}
-      typingEl.textContent=text.slice(0,ch);
-      requestAnimationFrame(tick);
-    }
-    tick();
+    // particle background
+    const c = document.getElementById('particles'); const cx = c.getContext('2d');
+    function resizeCanvas(){ c.width = innerWidth; c.height = innerHeight; }
+    window.addEventListener('resize', resizeCanvas); resizeCanvas();
+    const particles = [];
+    for(let i=0;i<110;i++){ particles.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-0.5)*0.45,vy:(Math.random()-0.5)*0.45,r:Math.random()*2+0.6,alpha:Math.random()*0.5+0.08}); }
+    function draw(){ cx.clearRect(0,0,c.width,c.height); for(const p of particles){ p.x+=p.vx; p.y+=p.vy; if(p.x<0)p.x=c.width; if(p.x>c.width)p.x=0; if(p.y<0)p.y=c.height; if(p.y>c.height)p.y=0; cx.beginPath(); cx.fillStyle=`rgba(225,29,72,${p.alpha})`; cx.arc(p.x,p.y,p.r,0,Math.PI*2); cx.fill(); } requestAnimationFrame(draw); } draw();
 
-    // Particle background
-    const c=document.getElementById('particles'),cx=c.getContext('2d');
-    function resizeCanvas(){c.width=innerWidth;c.height=innerHeight;}
-    window.addEventListener('resize',resizeCanvas);resizeCanvas();
-    const particles=[];
-    for(let i=0;i<80;i++){particles.push({x:Math.random()*c.width,y:Math.random()*c.height,
-      vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
-      r:Math.random()*2+0.8,alpha:Math.random()*0.5+0.1});}
-    function draw(){
-      cx.clearRect(0,0,c.width,c.height);
-      for(const p of particles){
-        p.x+=p.vx;p.y+=p.vy;
-        if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;
-        if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;
-        cx.beginPath();
-        cx.fillStyle=`rgba(225,29,72,${p.alpha})`;
-        cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fill();
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-
-    // Assignments
-    const assignments=[
-      {id:'os-1',title:'OS-Assignment-1',subject:'OS',file:'./OS_Assignment1.pdf'},
-      {id:'cpuc-1',title:'CPUC-Assignment-1',subject:'CPUC',file:'./CPUC-Assignment-1.pdf'}
+    const STORAGE_KEY = 'zyro_assign_v3';
+    let assignments = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [
+      {id:'os-1',title:'OS-Assignment-1',subject:'OS',file:'./OS_Assignment1.pdf',completed:false,downloads:0},
+      {id:'cpuc-1',title:'CPUC-Assignment-1',subject:'CPUC',file:'./CPUC-Assignment-1.pdf',completed:false,downloads:0}
     ];
-    let activeSubject='All';
-    function switchTab(e){
-      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-      e.currentTarget.classList.add('active');
-      activeSubject=e.currentTarget.dataset.subject;
-      renderList();
-    }
-    function renderList(){
-      const list=document.getElementById('assignList');list.innerHTML='';
-      assignments.filter(a=>activeSubject==='All'||a.subject===activeSubject)
-        .forEach(a=>{
-          const div=document.createElement('div');div.className='assign';
-          div.innerHTML=`<div class="left"><div class="badge">${a.subject[0]}</div>
-            <div><b>${a.title}</b><div style="font-size:12px;color:#aaa">${a.subject}</div></div></div>
-            <a class="btn download" href="${a.file}" download>Download</a>`;
-          list.appendChild(div);
-        });
-    }
-    renderList();
+
+    const activity = JSON.parse(localStorage.getItem('zyro_act_v3')||'[]');
+    function pushActivity(text){ activity.unshift({text,at:new Date().toISOString()}); localStorage.setItem('zyro_act_v3',JSON.stringify(activity.slice(0,100))); renderActivity(); }
+
+    function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(assignments)); }
+
+    let activeSubject = 'All';
+    function switchTab(e){ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); e.currentTarget.classList.add('active'); activeSubject = e.currentTarget.dataset.subject; renderList(); }
+
+    function renderList(){ const list = document.getElementById('assignList'); list.innerHTML=''; const q = (document.getElementById('search')?.value||'').trim().toLowerCase(); const status = document.getElementById('status').value; assignments.filter(a=> (activeSubject==='All' || a.subject===activeSubject) && (q==='' || a.title.toLowerCase().includes(q) || a.subject.toLowerCase().includes(q)) ).filter(a=> status==='all' || (status==='completed' && a.completed) || (status==='pending' && !a.completed)).forEach(a=>{ const div=document.createElement('div'); div.className='assign'+(a.completed?' completed':''); let icon = a.subject==='OS'?'<img src="https://i.postimg.cc/wxXsBnyj/os.webp" alt="os">':a.subject==='CPUC'?'<img src="https://i.postimg.cc/rsMsWF0F/cpuc.png" alt="cpuc">':'<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800\">'+a.subject[0]+'</div>';
+      div.innerHTML = `
+        <div class=\"left\">
+          <div class=\"badge-img\">${icon}</div>
+          <div>
+            <div class=\"meta\">${a.title} ${a.completed?'<span style=\"color:#6ee7b7;font-weight:700;margin-left:8px\">(Completed)</span>':''}</div>
+            <div class=\"sub\">By ${a.by||'Aayan Parmar'} • ${a.subject}</div>
+          </div>
+        </div>
+        <div class=\"actions\">
+          <a class=\"btn download\" href=\"${a.file}\" onclick=\"onDownload(event,'${a.id}')\" download>Download</a>
+          <button class=\"btn ghost\" onclick=\"toggleComplete('${a.id}')\">${a.completed?'Undo':'Complete'}</button>
+          <div class=\"count\">Downloads: <span id=\"cnt-${a.id}\">${a.downloads||0}</span></div>
+        </div>
+      `; list.appendChild(div); }); }
+
+    function onDownload(e,id){ const idx = assignments.findIndex(x=>x.id===id); if(idx===-1) return; assignments[idx].downloads = (assignments[idx].downloads||0)+1; document.getElementById('cnt-'+id).textContent = assignments[idx].downloads; saveState(); pushActivity(`Downloaded ${assignments[idx].title}`); }
+
+    function toggleComplete(id){ const idx = assignments.findIndex(x=>x.id===id); if(idx===-1) return; assignments[idx].completed = !assignments[idx].completed; saveState(); renderList(); pushActivity(`${assignments[idx].title} marked ${assignments[idx].completed? 'completed' : 'pending'}`); }
+
+    function renderActivity(){ const el = document.getElementById('activity'); if(!el) return; el.innerHTML=''; activity.slice(0,40).forEach(a=>{ const d = new Date(a.at); const p = document.createElement('div'); p.textContent = `${a.text} · ${d.toLocaleString()}`; el.appendChild(p); }); }
+
+    saveState(); renderList(); renderActivity();
   </script>
 </body>
 </html>
+
