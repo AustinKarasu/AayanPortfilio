@@ -12,7 +12,6 @@
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter,system-ui;background:linear-gradient(180deg,#07070a,#0e0b0b);color:#eef2f4;min-height:100vh}
-
     .stage{padding:28px;max-width:1200px;margin:0 auto}
     header{display:flex;justify-content:space-between;align-items:center}
     .brand{display:flex;gap:14px;align-items:center}
@@ -20,51 +19,39 @@
     .logo img{max-width:85%;max-height:85%;object-fit:contain}
     h1{margin:0;font-size:20px}
     .subtitle{color:var(--muted);font-size:13px}
-
     .announce{background:rgba(225,29,72,0.06);color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700}
-
     .grid{display:grid;grid-template-columns:1fr 340px;gap:20px;margin-top:20px}
-
     .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
-
     .tabs{display:flex;gap:8px;margin:14px 0}
     .tab{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;border:1px solid rgba(255,255,255,0.04);background:transparent;transition:all .18s}
     .tab img{width:18px;height:18px;border-radius:4px}
     .tab.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061014;transform:translateY(-4px);box-shadow:0 14px 30px rgba(225,29,72,0.12)}
-
     .controls{display:flex;gap:10px;align-items:center;margin-bottom:12px}
     .search{flex:1}
     .search input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
     .filter select{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
-
     .assign-list{display:grid;gap:14px}
     .assign{display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03);transition:transform .22s ease,box-shadow .22s ease}
     .assign:hover{transform:translateY(-8px);box-shadow:0 28px 60px rgba(0,0,0,0.6)}
     .assign.completed{opacity:0.8;filter:grayscale(.1)}
-
     .left{display:flex;gap:14px;align-items:center}
     .badge-img{width:56px;height:56px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease}
     .badge-img img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease}
     .assign:hover .badge-img{transform:scale(1.1);box-shadow:0 0 14px rgba(225,29,72,0.4)}
     .assign:hover .badge-img img{transform:scale(1.15)}
-
     .meta{font-size:15px;font-weight:700}
     .sub{color:var(--muted);font-size:13px}
-
     .actions{display:flex;gap:10px;align-items:center}
     .btn{padding:8px 12px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
     .btn.download{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061014}
     .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
-
     .sidebar .card{position:sticky;top:24px}
     .profile{display:flex;gap:12px;align-items:center;margin-top:12px}
     .avatar{width:72px;height:72px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
     .avatar img{width:100%;height:100%;object-fit:cover}
     .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
     .tag{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted)}
-
     footer{text-align:center;color:var(--muted);margin:18px 0;font-size:13px}
-
     @media (max-width:920px){.grid{grid-template-columns:1fr}.tab img{display:none}}
   </style>
 </head>
@@ -79,7 +66,7 @@
           <div class="subtitle" id="typing">Computer Engg: Assignments — 3rd Sem</div>
         </div>
       </div>
-      <div class="announce">New: OS Assignment-1</div>
+      <div class="announce">New: CPUC Assignment-2</div>
     </header>
 
     <div class="grid">
@@ -108,7 +95,7 @@
 
         <div class="card">
           <strong style="font-size:15px">Announcements</strong>
-          <div class="small" style="margin-top:8px">UPCOMMING: CPUC-Assignment 2</div>
+          <div class="small" style="margin-top:8px">UPCOMMING: CSA Assignment 1</div>
         </div>
       </section>
 
@@ -139,6 +126,7 @@
 
           <strong>Quick Links</strong>
           <div class="linklist" style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+            <a href="./CPUC-Assignment-2.pdf" download style="color:var(--accent)">CPUC Assignment 2</a>
             <a href="./OS_Assignment1.pdf" download style="color:var(--accent)">OS Assignment 1</a>
             <a href="./CPUC-Assignment-1.pdf" download style="color:var(--accent)">CPUC Assignment 1</a>
           </div>
@@ -166,7 +154,8 @@
     const STORAGE_KEY = 'zyro_assign_v3';
     let assignments = [
       {id:'os-1',title:'OS-Assignment-1',subject:'OS',file:'./OS_Assignment1.pdf',completed:true},
-      {id:'cpuc-1',title:'CPUC-Assignment-1',subject:'CPUC',file:'./CPUC-Assignment-1.pdf',completed:true}
+      {id:'cpuc-1',title:'CPUC-Assignment-1',subject:'CPUC',file:'./CPUC-Assignment-1.pdf',completed:true},
+      {id:'cpuc-2',title:'CPUC-Assignment-2',subject:'CPUC',file:'./CPUC-Assignment-2.pdf',completed:true}
     ];
 
     const activity = JSON.parse(localStorage.getItem('zyro_act_v3')||'[]');
@@ -175,17 +164,17 @@
     let activeSubject = 'All';
     function switchTab(e){ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); e.currentTarget.classList.add('active'); activeSubject = e.currentTarget.dataset.subject; renderList(); }
 
-    function renderList(){ const list = document.getElementById('assignList'); list.innerHTML=''; const q = (document.getElementById('search')?.value||'').trim().toLowerCase(); const status = document.getElementById('status').value; assignments.filter(a=> (activeSubject==='All' || a.subject===activeSubject) && (q==='' || a.title.toLowerCase().includes(q) || a.subject.toLowerCase().includes(q)) ).filter(a=> status==='all' || (status==='completed' && a.completed)).forEach(a=>{ const div=document.createElement('div'); div.className='assign completed'; let icon = a.subject==='OS'?'<img src="https://i.postimg.cc/wxXsBnyj/os.webp" alt="os">':a.subject==='CPUC'?'<img src="https://i.postimg.cc/rsMsWF0F/cpuc.png" alt="cpuc">':'<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800\">'+a.subject[0]+'</div>';
+    function renderList(){ const list = document.getElementById('assignList'); list.innerHTML=''; const q = (document.getElementById('search')?.value||'').trim().toLowerCase(); const status = document.getElementById('status').value; assignments.filter(a=> (activeSubject==='All' || a.subject===activeSubject) && (q==='' || a.title.toLowerCase().includes(q) || a.subject.toLowerCase().includes(q)) ).filter(a=> status==='all' || (status==='completed' && a.completed)).forEach(a=>{ const div=document.createElement('div'); div.className='assign completed'; let icon = a.subject==='OS'?'<img src="https://i.postimg.cc/wxXsBnyj/os.webp" alt="os">':a.subject==='CPUC'?'<img src="https://i.postimg.cc/rsMsWF0F/cpuc.png" alt="cpuc">':'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800">'+a.subject[0]+'</div>';
       div.innerHTML = `
-        <div class=\"left\">
-          <div class=\"badge-img\">${icon}</div>
+        <div class="left">
+          <div class="badge-img">${icon}</div>
           <div>
-            <div class=\"meta\">${a.title} <span style=\"color:#6ee7b7;font-weight:700;margin-left:8px\">(Completed)</span></div>
-            <div class=\"sub\">By ${a.by||'Aayan Parmar'} • ${a.subject}</div>
+            <div class="meta">${a.title} <span style="color:#6ee7b7;font-weight:700;margin-left:8px">(Completed)</span></div>
+            <div class="sub">By ${a.by||'Aayan Parmar'} • ${a.subject}</div>
           </div>
         </div>
-        <div class=\"actions\">
-          <a class=\"btn download\" href=\"${a.file}\" download>Download</a>
+        <div class="actions">
+          <a class="btn download" href="${a.file}" download>Download</a>
         </div>
       `; list.appendChild(div); }); }
 
