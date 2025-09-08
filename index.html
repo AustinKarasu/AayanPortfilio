@@ -66,7 +66,7 @@
           <div class="subtitle" id="typing">Computer Engg: Assignments — 3rd Sem</div>
         </div>
       </div>
-      <div class="announce">New: CPUC Assignment-2</div>
+      <div class="announce">New: CSA Assignment-1</div>
     </header>
 
     <div class="grid">
@@ -80,7 +80,8 @@
           <div class="tabs" role="tablist">
             <div class="tab active" data-subject="All" onclick="switchTab(event)">All</div>
             <div class="tab" data-subject="OS" onclick="switchTab(event)"><img src="https://i.postimg.cc/wxXsBnyj/os.webp" alt="OS">OS</div>
-            <div class="tab" data-subject="CPUC" onclick="switchTab(event)"><img src="https://i.postimg.cc/rsMsWF0F/cpuc.png" alt="CPUC">CPUC</div>
+            <div class="tab" data-subject="CPUC" onclick="switchTab(event)"><img src="https://i.postimg.cc/rsMsWF0F/cpuc.png" alt="CPUC">CPUC</div> 
+            <div class="tab" data-subject="CSA" onclick="switchTab(event)"><img src="https://i.postimg.cc/26Z28MKB/Screenshot-2025-09-08-220058.png" alt="CSA">CSA</div>
           </div>
 
           <div class="controls">
@@ -95,7 +96,7 @@
 
         <div class="card">
           <strong style="font-size:15px">Announcements</strong>
-          <div class="small" style="margin-top:8px">UPCOMMING: CSA Assignment 1</div>
+          <div class="small" style="margin-top:8px">All assignments completed [SEPTEMBER]</div>
         </div>
       </section>
 
@@ -128,6 +129,7 @@
           <div class="linklist" style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
             <a href="./CPUC-Assignment-2.pdf" download style="color:var(--accent)">CPUC Assignment 2</a>
             <a href="./OS_Assignment1.pdf" download style="color:var(--accent)">OS Assignment 1</a>
+            <a href="./CSA-Assignment-1.pdf" download style="color:var(--accent)">CSA Assignment 1</a>
           </div>
 
           <hr style="margin:16px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)" />
@@ -153,7 +155,8 @@
     const STORAGE_KEY = 'zyro_assign_v3';
     let assignments = [
       {id:'cpuc-2',title:'CPUC-Assignment-2',subject:'CPUC',file:'./CPUC-Assignment-2.pdf',completed:true},
-      {id:'os-1',title:'OS-Assignment-1',subject:'OS',file:'./OS_Assignment1.pdf',completed:true}
+      {id:'os-1',title:'OS-Assignment-1',subject:'OS',file:'./OS_Assignment1.pdf',completed:true},
+      {id:'os-1',title:'CSA-Assignment-1',subject:'CSA',file:'./CSA-Assignment-1.pdf',completed:true}
     ];
 
     const activity = JSON.parse(localStorage.getItem('zyro_act_v3')||'[]');
