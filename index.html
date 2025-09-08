@@ -56,7 +56,7 @@
   </style>
 </head>
 <body>
-  <canvas id="particles" style="position:fixed;inset:0;z-index:-1"></canvas>
+  <canvas id="particles" style="position:fixed;inset:0;z-index:-2"></canvas>
   <div class="stage">
     <header>
       <div class="brand">
@@ -156,7 +156,7 @@
     let assignments = [
       {id:'cpuc-2',title:'CPUC-Assignment-2',subject:'CPUC',file:'./CPUC-Assignment-2.pdf',completed:true},
       {id:'os-1',title:'OS-Assignment-1',subject:'OS',file:'./OS_Assignment1.pdf',completed:true},
-      {id:'os-1',title:'CSA-Assignment-1',subject:'CSA',file:'./CSA-Assignment-1.pdf',completed:true}
+      {id:'csa-1',title:'CSA-Assignment-1',subject:'CSA',file:'./CSA-Assignment-1.pdf',completed:true}
     ];
 
     const activity = JSON.parse(localStorage.getItem('zyro_act_v3')||'[]');
@@ -203,10 +203,10 @@
     tctx.clearRect(0,0,trailCanvas.width,trailCanvas.height);
     trail.forEach(p=>{
       tctx.beginPath();
-      tctx.fillStyle=`rgba(225,29,72,${p.alpha})`; // red accent glow
+      tctx.fillStyle=`rgba(225,29,72,${p.alpha})`; 
       tctx.arc(p.x,p.y,6,0,Math.PI*2);
       tctx.fill();
-      p.alpha-=0.02; // fade speed
+      p.alpha-=0.02; 
     });
     trail=trail.filter(p=>p.alpha>0);
     requestAnimationFrame(drawTrail);
@@ -216,3 +216,4 @@
 
 </body>
 </html>
+
