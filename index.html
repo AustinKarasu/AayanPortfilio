@@ -161,7 +161,7 @@
       {id:'csa-1',title:'CSA-Assignment-1',subject:'CSA',file:'https://raw.githubusercontent.com/AustinKarasu/zyronetwork/079c5ee5fb4ceda544f73f682bbac55a7e79e1e5/CSA-Assignment-1.pdf',completed:true},
       {id:'cpuc-2',title:'CPUC-Assignment-2',subject:'CPUC',file:'./CPUC-Assignment-2.pdf',completed:true},
       {id:'os-1',title:'OS-Assignment-1',subject:'OS',file:'./OS_Assignment1.pdf',completed:true},
-      {id:'cpuc-2',title:'CPUC-Assignment-1',subject:'CPUC',file:'https://raw.githubusercontent.com/AustinKarasu/zyronetwork/c3dd1e232798e006be0a571d260214ecf1b06ea5/CPUC-Assignment-1.pdf',completed:true}
+      {id:'cpuc-1',title:'CPUC-Assignment-1',subject:'CPUC',file:'https://raw.githubusercontent.com/AustinKarasu/zyronetwork/c3dd1e232798e006be0a571d260214ecf1b06ea5/CPUC-Assignment-1.pdf',completed:true}
     ];
 
     const activity = JSON.parse(localStorage.getItem('zyro_act_v3')||'[]');
@@ -170,19 +170,40 @@
     let activeSubject = 'All';
     function switchTab(e){ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); e.currentTarget.classList.add('active'); activeSubject = e.currentTarget.dataset.subject; renderList(); }
 
-    function renderList(){ const list = document.getElementById('assignList'); list.innerHTML=''; const q = (document.getElementById('search')?.value||'').trim().toLowerCase(); const status = document.getElementById('status').value; assignments.filter(a=> (activeSubject==='All' || a.subject===activeSubject) && (q==='' || a.title.toLowerCase().includes(q) || a.subject.toLowerCase().includes(q)) ).filter(a=> status==='all' || (status==='completed' && a.completed)).forEach(a=>{ const div=document.createElement('div'); div.className='assign completed'; let icon = a.subject==='OS'?'<img src="https://i.postimg.cc/wxXsBnyj/os.webp" alt="os">':a.subject==='CPUC'?'<img src="https://i.postimg.cc/rsMsWF0F/cpuc.png" alt="cpuc">':':a.subject==='DCCN'?'<img src="https://i.postimg.cc/TYxBrj8X/Datacom-logo.webp" alt="dccn">':a.subject==='CSA'?'<img src="https://i.postimg.cc/26Z28MKB/Screenshot-2025-09-08-220058.png" alt="csa">':'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800">'+a.subject[0]+'</div>';
-      div.innerHTML = `
-        <div class="left">
-          <div class="badge-img">${icon}</div>
-          <div>
-            <div class="meta">${a.title} <span style="color:#6ee7b7;font-weight:700;margin-left:8px">(Completed)</span></div>
-            <div class="sub">By ${a.by||'Aayan Parmar'} • ${a.subject}</div>
-          </div>
-        </div>
-        <div class="actions">
-          <a class="btn download" href="${a.file}" download>Download</a>
-        </div>
-      `; list.appendChild(div); }); }
+    function renderList(){
+      const list = document.getElementById('assignList'); list.innerHTML='';
+      const q = (document.getElementById('search')?.value||'').trim().toLowerCase();
+      const status = document.getElementById('status').value;
+
+      assignments
+        .filter(a=> (activeSubject==='All' || a.subject===activeSubject) && (q==='' || a.title.toLowerCase().includes(q) || a.subject.toLowerCase().includes(q)) )
+        .filter(a=> status==='all' || (status==='completed' && a.completed))
+        .forEach(a=>{
+          const div=document.createElement('div');
+          // only add completed class when a.completed === true
+          div.className = 'assign' + (a.completed ? ' completed' : '');
+
+          const icon = a.subject === 'OS' ? '<img src="https://i.postimg.cc/wxXsBnyj/os.webp" alt="os">'
+            : a.subject === 'CPUC' ? '<img src="https://i.postimg.cc/rsMsWF0F/cpuc.png" alt="cpuc">'
+            : a.subject === 'DCCN' ? '<img src="https://i.postimg.cc/TYxBrj8X/Datacom-logo.webp" alt="dccn">'
+            : a.subject === 'CSA' ? '<img src="https://i.postimg.cc/26Z28MKB/Screenshot-2025-09-08-220058.png" alt="csa">'
+            : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800">' + (a.subject ? a.subject[0] : '') + '</div>';
+
+          div.innerHTML = `
+            <div class="left">
+              <div class="badge-img">${icon}</div>
+              <div>
+                <div class="meta">${a.title} ${a.completed ? '<span style="color:#6ee7b7;font-weight:700;margin-left:8px">(Completed)</span>' : ''}</div>
+                <div class="sub">By ${a.by||'Aayan Parmar'} • ${a.subject}</div>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn download" href="${a.file}" download>Download</a>
+            </div>
+          `;
+          list.appendChild(div);
+        });
+    }
 
     function renderActivity(){ const el = document.getElementById('activity'); if(!el) return; el.innerHTML=''; activity.slice(0,40).forEach(a=>{ const d = new Date(a.at); const p = document.createElement('div'); p.textContent = `${a.text} · ${d.toLocaleString()}`; el.appendChild(p); }); }
 
@@ -208,10 +229,10 @@
     tctx.clearRect(0,0,trailCanvas.width,trailCanvas.height);
     trail.forEach(p=>{
       tctx.beginPath();
-      tctx.fillStyle=`rgba(225,29,72,${p.alpha})`; 
+      tctx.fillStyle=`rgba(225,29,72,${p.alpha})`;
       tctx.arc(p.x,p.y,6,0,Math.PI*2);
       tctx.fill();
-      p.alpha-=0.02; 
+      p.alpha-=0.02;
     });
     trail=trail.filter(p=>p.alpha>0);
     requestAnimationFrame(drawTrail);
@@ -221,4 +242,5 @@
 
 </body>
 </html>
+
 
