@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me | AayanKarasu</title>
+  <link rel="stylesheet" href="about.css" />
+</head>
+<body>
+  <div class="background-effects"></div>
+  <canvas id="cursorTrail"></canvas>
+
+  <header>
+    <div class="logo">AayanKarasu</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a class="active" href="#">About Me</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="about-section">
+  <div class="about-image">
+    <img src="logo.jpg" alt="Aayan Karasu">
+  </div>
+  <div class="about-content">
+    <h1>About <span>Me</span></h1>
+    <p>
+      Hey! I’m <span class="highlight">AayanKarasu</span>, a passionate developer and creative editor.
+      I love building modern, functional websites and applications with a glowing aesthetic.
+      I’ve worked with tools like <b>PHP</b>, <b>MySQL</b>, and frameworks for
+      <b>app development</b>, while also creating impactful <b>video edits</b> and motion visuals.
+    </p>
+    <p>
+      My goal is to keep improving, learning, and creating — whether it’s a glowing web app,
+      a stylish cinematic edit, or something that inspires others.
+    </p>
+    <p>
+      I also have extensive knowledge in <b>VirtualBox</b>, <b>Linux setups</b>, and <b>hosting servers</b>.
+      Beyond coding, I’m deeply into <b>video editing</b>, <b>gaming</b>, and exploring creative
+      <b>graphic design</b> projects. I’ve built and configured <b>game plugins</b>, managed
+      projects on <b>GitHub</b>, and collaborated through <b>Discord</b> communities.
+    </p>
+    <p>
+      Currently, I’m a <b>Computer Engineering</b> student at <b>Govt. Polytechnic Kangra</b>,
+      studying in my <b>3rd semester</b> — always pushing to grow my skills and learn something new every day.
+    </p>
+
+    <div class="buttons">
+      <a href="projects.html" class="btn-outline">View My Work</a>
+      <a href="contact.html" class="btn-outline">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- Image Gallery -->
+<section class="gallery-section">
+  <h2><span>Certificates</span> & Some Moments</h2>
+  <div class="gallery">
+    <img src="img1.jpg" alt="Work 1" class="popup-img">
+    <img src="img2.jpg" alt="Work 2" class="popup-img">
+    <img src="img3.jpg" alt="Work 3" class="popup-img">
+  </div>
+</section>
+
+<!-- POPUP OVERLAY -->
+<div class="image-popup" id="imagePopup">
+  <span class="close-btn" id="closePopup">&times;</span>
+  <img src="" alt="Popup Image" id="popupImage">
+</div>
+
+  <footer>
+    © 2025 AayanKarasu | Him
+  </footer>
+
+  <script src="trail.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const popup = document.getElementById("imagePopup");
+    const popupImage = document.getElementById("popupImage");
+    const closePopup = document.getElementById("closePopup");
+    const galleryImages = document.querySelectorAll(".popup-img");
+
+    galleryImages.forEach(img => {
+      img.addEventListener("click", () => {
+        popup.style.display = "flex";
+        popupImage.src = img.src;
+        setTimeout(() => popup.style.opacity = "1", 10);
+      });
+    });
+
+    closePopup.addEventListener("click", () => {
+      popup.style.opacity = "0";
+      setTimeout(() => popup.style.display = "none", 300);
+    });
+
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.style.opacity = "0";
+        setTimeout(() => popup.style.display = "none", 300);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

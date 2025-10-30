@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills | AayanKarasu</title>
+  <link rel="stylesheet" href="skills.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">AayanKarasu</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a class="active" href="#">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About Me</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div id="clock"></div>
+
+  <section class="skills-section">
+    <h1>My <span>Skills</span></h1>
+    <p class="intro">
+      A showcase of the abilities I’ve developed through passion, creativity, and projects.  
+      Each skill bar represents my experience and confidence in that area 💻✨
+    </p>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h2>🎬 Video Editing</h2>
+        <p>After Effects • Premiere Pro • CapCut Pro</p>
+        <div class="bar"><span style="--width:70%"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <h2>📱 App Development</h2>
+        <p>Android Studio • Firebase • Flutter</p>
+        <div class="bar"><span style="--width:60%"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <h2>💻 PHP & MySQL</h2>
+        <p>Backend Logic • Database Design • APIs</p>
+        <div class="bar"><span style="--width:35%"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <h2>🧠 Prompt Engineering</h2>
+        <p>AI Logic • Context Design • Automation</p>
+        <div class="bar"><span style="--width:100%"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <h2>🌐 Web Development</h2>
+        <p>HTML • CSS • JS • Responsive Design</p>
+        <div class="bar"><span style="--width:85%"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <h2>🎮 Gaming & Streaming</h2>
+        <p>OBS Setup • Overlays • Shaders</p>
+        <div class="bar"><span style="--width:100%"></span></div>
+      </div>
+    </div>
+
+    <div class="extra-section">
+      <h2>💡 Other Interests</h2>
+      <p>Exploring Linux tools, virtual machines, and UI/UX design to improve my technical creativity.</p>
+      <a href="projects.html" class="btn">See My Projects</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Aayan Parmar | KarasuBerry ⚡
+  </footer>
+
+  <script>
+    // Live Clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerText = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>

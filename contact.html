@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | AayanKarasu</title>
+  <link rel="stylesheet" href="contact.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">AayanKarasu</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About Me</a>
+      <a class="active" href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="contact-section">
+    <h1>Get in <span>Touch</span></h1>
+    <p class="intro">
+      Let’s connect! Reach me directly through any of the following platforms.  
+      I'm always open to collaborations, freelance work, or just a friendly chat 🚀
+    </p>
+
+    <div class="contact-container">
+      <div class="contact-card">
+        <img src="whatsapp.webp" alt="WhatsApp">
+        <h2>WhatsApp</h2>
+        <a href="https://wa.me/9816157745" target="_blank">Chat on WhatsApp</a>
+      </div>
+
+      <div class="contact-card">
+        <img src="email.webp" alt="Email">
+        <h2>Email</h2>
+        <a href="mailto:berrykarasu@gmail.com">berrykarasu@gmail.com</a>
+      </div>
+
+      <div class="contact-card">
+        <img src="discord.jpg" alt="Discord">
+        <h2>Discord</h2>
+        <a href="https://discord.aayankarasu.fun/" target="_blank">Join my Discord</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Aayan Parmar | KarasuBerry 🔥
+  </footer>
+
+  <!-- Cursor Trail -->
+  <script>
+  const trail = [];
+  const trailLength = 15;
+  document.addEventListener("mousemove", e => {
+    const circle = document.createElement("div");
+    circle.className = "trail-dot";
+    circle.style.left = `${e.pageX}px`;
+    circle.style.top = `${e.pageY}px`;
+    document.body.appendChild(circle);
+    trail.push(circle);
+    if (trail.length > trailLength) {
+      const old = trail.shift();
+      old.remove();
+    }
+    setTimeout(() => circle.remove(), 800);
+  });
+  </script>
+
+  <!-- Red Particle Background -->
+  <script>
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  document.body.appendChild(canvas);
+  canvas.classList.add("particle-bg");
+
+  let particles = [];
+  const numParticles = 80;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  for (let i = 0; i < numParticles; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5,
+      glow: Math.random() * 15 + 10
+    });
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 0, 0, 0.8)`;
+      ctx.shadowBlur = p.glow;
+      ctx.shadowColor = "red";
+      ctx.fill();
+
+      p.x += p.dx;
+      p.y += p.dy;
+
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+  </script>
+</body>
+</html>

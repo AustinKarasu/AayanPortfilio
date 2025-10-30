@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | AayanKarasu</title>
+  <link rel="stylesheet" href="projects.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">AayanKarasu</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="skills.html">Skills</a>
+      <a class="active" href="#">Projects</a>
+      <a href="about.html">About Me</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div id="clock"></div>
+
+  <section class="projects">
+    <h1>My <span>Projects</span></h1>
+    <p class="desc">Where code meets creativity — web apps, edits, and more 🔥</p>
+
+    <div class="project-container">
+      <div class="card">
+        <img src="project1.png" alt="College Website" />
+        <div class="content">
+          <h2>College Website</h2>
+          <p>Assignment submission portal with glowing red UI made using HTML, CSS, and JS.</p>
+          <a href="https://github.com/AustinKarasu/zyrowebsite" target="_blank">View on GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="project2.png" alt="ZyroLauncher" />
+        <div class="content">
+          <h2>ZyroLauncher</h2>
+          <p>An .exe software made by me for fun.</p>
+          <a href="https://github.com/AustinKarasu/ZyroLauncher" target="_blank">View on GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="project3.png" alt="Plugins" />
+        <div class="content">
+          <h2>Plugins</h2>
+          <p>Simple PHP coded plugin for a minecraft server.</p>
+          <a href="https://github.com/AustinKarasu" target="_blank">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Aayan Parmar | KarasuBerry | More Projects Soon🔥
+  </footer>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerText = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>

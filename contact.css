@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background: radial-gradient(circle at top left, #330000, #660000, #1a0000);
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 60px;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.logo {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 15px red;
+}
+
+nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+nav a:hover, nav a.active {
+  color: #ffcccc;
+  text-shadow: 0 0 12px red;
+}
+
+.contact-section {
+  min-height: 100vh;
+  padding-top: 120px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.contact-section h1 {
+  font-size: 2.5rem;
+  text-shadow: 0 0 25px red;
+}
+
+.contact-section span {
+  color: #ff6666;
+}
+
+.intro {
+  margin: 20px auto 40px;
+  max-width: 700px;
+  color: #ffcccc;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 30px;
+  width: 260px;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+}
+
+.contact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+}
+
+.contact-card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 8px red);
+}
+
+.contact-card h2 {
+  margin-bottom: 10px;
+  color: #ff6666;
+}
+
+.contact-card a {
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid red;
+  padding: 10px 15px;
+  border-radius: 30px;
+  display: inline-block;
+  margin-top: 10px;
+  background: rgba(255, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.contact-card a:hover {
+  background: red;
+  box-shadow: 0 0 20px red;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  position: relative;
+  z-index: 10;
+}
+
+.trail-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: red;
+  pointer-events: none;
+  opacity: 0.8;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px red;
+}
+
+.particle-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aayan Parmar | KarasuBerry</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <div class="logo">AayanKarasu</div>
+    <nav>
+      <a class="active" href="#">Home</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About Me</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- CLOCK -->
+  <div id="clock"></div>
+
+  <!-- BACKGROUND EFFECTS -->
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-image">
+        <img src="logo.jpg" alt="Aayan Image">
+      </div>
+      <div class="hero-text">
+        <h1>Hi, It's <span>AayanKarasu</span></h1>
+        <h2>I'm a <span class="role">Web Developer | Video Editor | PHP | MySQL | More</span></h2>
+        <p>
+          I create interactive digital experiences — from modern websites to
+          creative edits that capture emotion and design precision.  
+          You can have a look at some of my work in the Projects section.
+        </p>
+        <div class="buttons">
+          <a href="projects.html" class="btn-outline">Projects</a>
+          <a href="skills.html" class="btn-outline">Skills</a>
+          <a href="#" class="btn-outline">Contact Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Aayan Parmar | KarasuBerry 🔥
+  </footer>
+
+  <!-- CLOCK SCRIPT -->
+  <script>
+    function updateClock() {
+      const clock = document.getElementById('clock');
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      clock.textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
+
