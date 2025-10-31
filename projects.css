@@ -174,13 +174,33 @@ footer {
   margin-top: 80px;
   border-top: 1px solid rgba(255, 0, 0, 0.2);
 }
-/* YouTube Fallback Cards */
+/* Fix video fallback cards layout */
+.video-fallback {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(15, 0, 0, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  height: 420px; /* same as your other cards */
+}
+
+.video-fallback:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
+}
+
 .video-fallback .thumb {
   position: relative;
   width: 100%;
-  height: 55%;
+  aspect-ratio: 16/9; /* keeps consistent video shape */
   cursor: pointer;
   overflow: hidden;
+  border-bottom: 2px solid #300000;
   border-radius: 18px 18px 0 0;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
@@ -189,7 +209,7 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.7);
+  filter: brightness(0.8);
   transition: filter 0.3s ease;
 }
 
@@ -202,14 +222,31 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3rem;
+  font-size: 2.8rem;
   color: #ff4444;
-  text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+  text-shadow: 0 0 25px #ff0000, 0 0 45px #ff0000;
   opacity: 0.9;
   transition: transform 0.3s ease, text-shadow 0.3s ease;
 }
 
 .video-fallback .thumb:hover .play-btn {
   transform: translate(-50%, -50%) scale(1.2);
-  text-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
+  text-shadow: 0 0 35px #ff0000, 0 0 65px #ff0000;
 }
+
+.video-fallback .content {
+  padding: 20px;
+  text-align: center;
+}
+
+.video-fallback .content h2 {
+  color: #ff3333;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px #ff0000;
+}
+
+.video-fallback .content p {
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
