@@ -226,3 +226,6 @@ nav a.active {
   .card { height: 420px; } /* keep same look on small screens */
   .project-container { gap: 20px; }
 }
+footer {
+text-align: center
+  }
