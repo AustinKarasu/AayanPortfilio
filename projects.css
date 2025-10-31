@@ -227,5 +227,7 @@ nav a.active {
   .project-container { gap: 20px; }
 }
 footer {
-text-align: center
+text-align: center;
+color: #fff;
   }
+
