@@ -13,6 +13,7 @@ body {
   background-attachment: fixed;
   overflow-x: hidden;
   min-height: 100vh;
+  padding-bottom: 60px;
 }
 
 /* Header */
@@ -20,7 +21,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 60px;
+  padding: 18px 40px;
   position: fixed;
   width: 100%;
   z-index: 100;
@@ -30,14 +31,14 @@ header {
 }
 
 .logo {
-  font-size: 1.7rem;
+  font-size: 1.45rem;
   font-weight: 600;
   color: #ff4444;
-  text-shadow: 0 0 15px #ff0000;
+  text-shadow: 0 0 12px #ff0000;
 }
 
 nav a {
-  margin-left: 25px;
+  margin-left: 18px;
   text-decoration: none;
   color: #fff;
   font-weight: 400;
@@ -47,35 +48,35 @@ nav a {
 nav a:hover,
 nav a.active {
   color: #ff3333;
-  text-shadow: 0 0 10px #ff3333;
+  text-shadow: 0 0 8px #ff3333;
 }
 
 /* Clock */
 #clock {
   position: relative;
-  margin-top: 130px;
-  font-size: 1.3rem;
+  margin-top: 85px;
+  font-size: 1.1rem;
   color: #ff4d4d;
   text-align: center;
   letter-spacing: 2px;
-  text-shadow: 0 0 10px #ff0000, 0 0 25px #ff3333;
-  background: rgba(50, 0, 0, 0.3);
-  padding: 8px 25px;
+  text-shadow: 0 0 10px #ff0000, 0 0 18px #ff3333;
+  background: rgba(50, 0, 0, 0.25);
+  padding: 6px 18px;
   display: inline-block;
   border-radius: 10px;
-  border: 1px solid rgba(255, 0, 0, 0.25);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.18);
+  box-shadow: 0 0 14px rgba(255, 0, 0, 0.14);
 }
 
 /* Projects Section */
 .projects {
   text-align: center;
-  padding: 120px 60px;
+  padding: 110px 40px 40px;
 }
 
 .projects h1 {
-  font-size: 2.8rem;
-  text-shadow: 0 0 25px #ff0000;
+  font-size: 2.4rem;
+  text-shadow: 0 0 18px #ff0000;
 }
 
 .projects h1 span {
@@ -83,40 +84,43 @@ nav a.active {
 }
 
 .desc {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #ffcccc;
-  margin: 15px auto 50px;
+  margin: 10px auto 30px;
   max-width: 700px;
   line-height: 1.6;
 }
 
-/* Project Cards */
+/* Grid */
 .project-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 34px;
+  align-items: start;
+  padding: 10px;
 }
 
+/* Card base (applies to all cards) */
 .card {
-  width: 320px;
-  height: 380px;
-  background: rgba(30, 0, 0, 0.7);
-  border: 1px solid rgba(255, 0, 0, 0.2);
+  background: rgba(20, 0, 0, 0.75);
+  border: 1px solid rgba(255, 0, 0, 0.16);
   border-radius: 18px;
-  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.18);
   overflow: hidden;
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 420px; /* fixed height for consistent grid */
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 45px rgba(255, 0, 0, 0.5);
+  transform: translateY(-8px);
+  box-shadow: 0 0 48px rgba(255, 0, 0, 0.35);
 }
 
+/* Image for regular projects */
 .card img {
   width: 100%;
   height: 55%;
@@ -124,129 +128,101 @@ nav a.active {
   border-radius: 18px 18px 0 0;
 }
 
+/* Content */
 .content {
-  padding: 20px;
+  padding: 18px;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  text-align: center;
 }
 
 .content h2 {
   color: #ff4d4d;
   text-shadow: 0 0 10px #ff0000;
-  font-size: 1.3rem;
-  margin-bottom: 10px;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
 }
 
 .content p {
   font-size: 0.95rem;
   color: #ffcccc;
-  line-height: 1.4;
-  flex-grow: 1;
+  line-height: 1.45;
+  margin-bottom: 14px;
 }
 
-.content a {
+/* Buttons */
+.btn {
   text-decoration: none;
   padding: 10px 20px;
   border-radius: 25px;
-  font-weight: 500;
+  font-weight: 600;
   border: 1px solid #ff3333;
   color: #fff;
   background: linear-gradient(45deg, #ff0000, #990000);
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-  transition: 0.4s ease;
-  align-self: center;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.content a:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 28px rgba(255, 0, 0, 0.6);
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 25px;
-  background: rgba(20, 0, 0, 0.8);
-  color: #ff9999;
-  font-size: 0.9rem;
-  margin-top: 80px;
-  border-top: 1px solid rgba(255, 0, 0, 0.2);
-}
-/* Fix video fallback cards layout */
-.video-fallback {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(15, 0, 0, 0.8);
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  height: 420px; /* same as your other cards */
-}
-
-.video-fallback:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
-}
-
+/* Video fallback styles */
 .video-fallback .thumb {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/9; /* keeps consistent video shape */
+  aspect-ratio: 16/9;
   cursor: pointer;
   overflow: hidden;
-  border-bottom: 2px solid #300000;
   border-radius: 18px 18px 0 0;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .video-fallback .thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.8);
-  transition: filter 0.3s ease;
+  filter: brightness(0.75);
+  transition: filter 0.25s ease, transform 0.25s ease;
 }
 
 .video-fallback .thumb:hover img {
   filter: brightness(1);
+  transform: scale(1.02);
 }
 
 .video-fallback .play-btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2.8rem;
-  color: #ff4444;
-  text-shadow: 0 0 25px #ff0000, 0 0 45px #ff0000;
-  opacity: 0.9;
-  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  font-size: 2.6rem;
+  color: #fff;
+  background: rgba(255, 68, 68, 0.92);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(10%);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .video-fallback .thumb:hover .play-btn {
-  transform: translate(-50%, -50%) scale(1.2);
-  text-shadow: 0 0 35px #ff0000, 0 0 65px #ff0000;
+  transform: translateY(0) scale(1.08);
+  box-shadow: 0 0 32px rgba(255, 0, 0, 0.6);
 }
 
-.video-fallback .content {
-  padding: 20px;
-  text-align: center;
+/* Responsive tweaks */
+@media (max-width: 760px) {
+  header { padding: 14px 18px; }
+  .projects { padding-top: 95px; }
+  .card { height: 420px; } /* keep same look on small screens */
+  .project-container { gap: 20px; }
 }
-
-.video-fallback .content h2 {
-  color: #ff3333;
-  margin-bottom: 10px;
-  text-shadow: 0 0 15px #ff0000;
-}
-
-.video-fallback .content p {
-  color: #ddd;
-  font-size: 0.95rem;
-}
-
