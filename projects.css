@@ -226,45 +226,6 @@ nav a.active {
   .card { height: 420px; } /* keep same look on small screens */
   .project-container { gap: 20px; }
 }
-.about-projects {
-  max-width: 900px;
-  margin: 80px auto;
-  text-align: center;
-  color: #f0f0f0;
-  padding: 40px;
-  background: rgba(255, 0, 0, 0.05);
-  border: 1px solid rgba(255, 0, 0, 0.2);
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.about-projects h2 {
-  font-size: 2.5em;
-  color: #ff1a1a;
-  margin-bottom: 20px;
-}
-
-.about-projects p {
-  font-size: 1.1em;
-  line-height: 1.8;
-  margin-bottom: 20px;
-}
-
-.visit-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background: #ff1a1a;
-  color: #fff;
-  border-radius: 30px;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.visit-btn:hover {
-  background: #ff4d4d;
-  transform: scale(1.05);
-}
 
 
 
