@@ -174,3 +174,42 @@ footer {
   margin-top: 80px;
   border-top: 1px solid rgba(255, 0, 0, 0.2);
 }
+/* YouTube Fallback Cards */
+.video-fallback .thumb {
+  position: relative;
+  width: 100%;
+  height: 55%;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.video-fallback .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  transition: filter 0.3s ease;
+}
+
+.video-fallback .thumb:hover img {
+  filter: brightness(1);
+}
+
+.video-fallback .play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: #ff4444;
+  text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+  opacity: 0.9;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.video-fallback .thumb:hover .play-btn {
+  transform: translate(-50%, -50%) scale(1.2);
+  text-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
+}
